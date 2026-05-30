@@ -830,9 +830,9 @@ body {
 }
 
 .admin-nav-button {
-    width: 7em;
-    height: 2.8em;
-    font-size: 10px;
+    width: 9em;
+    height: 3.2em;
+    font-size: 11px;
     margin-left: 0;
     margin-right: 0;
     padding: 0;
@@ -1288,9 +1288,9 @@ body {
     }
 
     .admin-nav-button {
-        width: 7em;
-        height: 2.8em;
-        font-size: 8px;
+        width: 9em;
+        height: 3.2em;
+        font-size: 9px;
         margin-left: 0;
         margin-right: 0;
     }

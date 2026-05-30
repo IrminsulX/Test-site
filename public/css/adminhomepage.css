@@ -106,6 +106,60 @@
     color: #555;
 }
 
+.admin-form-group input[type="url"],
+.admin-form-group textarea,
+.admin-form-group select,
+.admin-form-group .form-select {
+    width: 100%;
+    padding: 12px 14px;
+    background: #212121;
+    border: 1px solid #333;
+    color: #fff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.admin-form-group input[type="url"]:focus,
+.admin-form-group textarea:focus,
+.admin-form-group select:focus,
+.admin-form-group .form-select:focus {
+    border-color: #db4f56;
+}
+
+.admin-form-group input[type="url"]::placeholder,
+.admin-form-group textarea::placeholder {
+    color: #555;
+}
+
+.admin-form-group select,
+.admin-form-group .form-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23888' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+.admin-form-group select option,
+.admin-form-group .form-select option {
+    background: #212121;
+    color: #fff;
+}
+
+.admin-form-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #db4f56;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
 /* File Input */
 .admin-file-wrap {
     position: relative;
