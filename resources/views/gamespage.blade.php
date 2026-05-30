@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <title>Irminsul Studio | Games Page</title>
+
+    <link rel="stylesheet" href="css/gamespage.css">
+    <link rel="stylesheet" href="css/main.css">
+    
+</head>
+
+<body>
+
+    <!-- Header section -->
+    <nav class="header">
+        <nav class="navbar navbar-expand-lg">
+
+            <!-- Logo and Brand -->
+            <a class="navbar d-flex align-items-center" href="{{ route('home') }}">
+                <img src="{{ asset('images/StudioLogo.png') }}" alt="Studio Logo" class="logo-icon">
+                <button class="studio-button">Irminsul Studio ツ</button>
+            </a>
+
+            <!-- Left Side Content (Empty for now) -->
+            <ul class="navbar-nav">
+                <!-- Left Side Content -->
+            </ul>
+
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ms-auto">
+
+                <a class="nav-link" href="{{ route('home') }}">
+                    <button class="homepage-button">Home</button>
+                </a>
+
+                <a class="nav-link" href="{{ route('gamespage') }}">
+                    <button class="homepage-button">Games</button>
+                </a>
+
+                <a class="nav-link" href="{{ route('aboutpage') }}">
+                    <button class="homepage-button">About</button>
+                </a>
+
+                <a class="nav-link" href="{{ route('contact') }}">
+                    <button class="homepage-button">Contact</button>
+                </a>
+
+                <div class="header-border"></div>
+
+                @guest
+                    @if (Route::has('login'))
+                        <a class="nav-link" href="{{ route('register') }}">
+                            <button class="register-button">Sign up</button>
+                        </a>
+                        
+                        <a class="nav-link" href="{{ route('login') }}">
+                            <button class="register-button">Log in</button>
+                        </a>
+                    @endif
+
+                @else
+                    
+                    <button class="log-out-button nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }}
+                    </button>
+
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <button class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            {{ __('Sign out') }}
+                        </button>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                @endguest
+
+            </ul>
+            
+        </nav>
+    </nav>
+
+    <div class="games-dashboard">
+        <h2>
+            <a href="https://www.roblox.com" target="_blank">
+                <img src="{{ asset('images/HD New Roblox Logo Icon PNG - 800x800.png') }}" alt="Roblox Logo" class="game-icon">
+            </a>
+            ROBLOX GAMES
+        </h2>
+    </div>
+
+    <div class="container games-dashboard-background">
+
+        <!-- 1st Row Left Image Section -->
+        <div class="left-image">
+            <img src="https://via.placeholder.com/100" alt="Left Image">
+        </div>
+
+        <!-- Center Content -->
+        <div class="center-content">
+            <div class="title">TITLE</div>
+            <div class="description"><span>DESCRIPTION</span></div>
+        </div>
+
+        <!-- Right Image Section -->
+        <div class="right-image">
+            <img src="https://via.placeholder.com/100" alt="Right Image">
+        </div>
+        
+        <!-- 2nd Row Left Image Section -->
+        <div class="left-image">
+            <img src="https://via.placeholder.com/100" alt="Left Image">
+        </div>
+
+        <!-- Center Content -->
+        <div class="center-content">
+            <div class="title">TITLE</div>
+            <div class="description"><span>DESCRIPTION</span></div>
+        </div>
+
+        <!-- Right Image Section -->
+        <div class="right-image">
+            <img src="https://via.placeholder.com/100" alt="Right Image">
+        </div>
+
+    </div>
+
+    <!-- Featured Games Section -->
+    <div class="featured-section">
+        <div class="featured-heading">
+            <span class="featured-star">&#9733;</span>
+            <h2>FEATURED GAMES</h2>
+            <span class="featured-star">&#9733;</span>
+        </div>
+
+        <div class="featured-wrapper" id="featuredWrapper">
+            <button class="featured-arrow prev" aria-label="Previous slide">&#10094;</button>
+
+            <div class="featured-slider" id="featuredSlider">
+                @forelse (\App\Models\AdminHomepageImages::where('type', 'featured')->get() as $image)
+                    <div class="featured-slide">
+                        <div class="featured-card-image">
+                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $image->game_name }}" loading="lazy">
+                            <div class="featured-card-overlay">
+                                <h3 class="featured-card-title">{{ $image->game_name }}</h3>
+                                <span class="featured-card-cta">View Game &#10132;</span>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="featured-empty">
+                        <div class="featured-empty-icon">&#9733;</div>
+                        <p>No featured games yet</p>
+                        <span>Check back soon for exciting new releases!</span>
+                    </div>
+                @endforelse
+            </div>
+
+            <button class="featured-arrow next" aria-label="Next slide">&#10095;</button>
+
+            <div class="featured-dots" id="featuredDots"></div>
+        </div>
+    </div>
+
+    <!-- Footer's section -->
+
+    <nav class="footer">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                
+                <!-- Left Side Of Navbar -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+
+                    <button class="social-media-buttons instagram">
+                        <a href="https://www.instagram.com" target="_blank">
+                            <img src="{{ asset('images/instagram-white-icon.png') }}" alt="Instagram">
+                        </a>
+                    </button>
+
+                    <button class="social-media-buttons youtube">
+                        <a href="https://www.youtube.com" target="_blank">
+                            <img src="{{ asset('images/youtube-app-white-icon.png') }}" alt="YouTube">
+                        </a>
+                    </button>
+
+                    <button class="social-media-buttons twitter">
+                        <a href="https://x.com/?mx=2" target="_blank">
+                            <img src="{{ asset('images/x-social-media-white-icon.png') }}" alt="twitter">
+                        </a>
+                    </button>
+
+                    <button class="social-media-buttons discord">
+                        <a href="https://discord.com/" target="_blank">
+                            <img src="{{ asset('images/discord-white-icon.png') }}" alt="twitter">
+                        </a>
+                    </button>
+
+                    <button class="social-media-buttons bluesky">
+                        <a href="https://bsky.app/" target="_blank">
+                            <img src="{{ asset('images/bluesky-icon.png') }}" alt="bluesky">
+                        </a>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Right Side Of Navbar -->
+                        <div class="navbar-container"> <!-- Changed from <ul> to <div> -->
+
+                            <!-- Administrator Page Button --> 
+                            @auth
+                                @if(auth()->user()->isAdmin())
+                                    <a href="{{ route('adminhomepages') }}">
+                                        <!-- Administrator Page Button --> 
+                                        <button class="admin-dashboard-button">
+                                            <span> Administrator Page </span>
+                                        </button>
+                                    </a>
+                                @endif
+                            @endauth
+
+                            <div class="spinner-box">
+                                <div class="configure-border-1">  
+                                    <div class="configure-core"></div>
+                                </div>  
+                                <div class="configure-border-2">
+                                    <div class="configure-core"></div>
+                                </div> 
+                            </div>
+
+                            <div class="copyright">
+                                © 2025 Irminsul Studio ツ
+                            </div>
+
+                        </div> <!-- Closed the div -->
+
+                    </div>
+                    
+                </div>
+            </div>
+        </nav>
+    </nav>
+    
+<script src="/js/homepage.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>

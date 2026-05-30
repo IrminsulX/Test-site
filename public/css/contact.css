@@ -1,0 +1,750 @@
+body {
+    /* font-family: Arial, sans-serif; */
+    /* background: url('https://media.discordapp.net/attachments/1181231431314321491/1308494215667515545/1000.png?ex=673e25b3&is=673cd433&hm=d599d80e88c1862402a73898830521a531248ebb7f14bf8daeb651cad0f713ba&=&format=webp&quality=lossless') no-repeat center center fixed; */
+    background: linear-gradient(0deg, #191a1f 0%, #191a1f 100%);
+    background-size: cover;
+    overflow-x: hidden;
+    color: white;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* Header Section */
+
+.header {
+    /* justify-content: space-between;
+    align-items: left; */
+    padding: 0px;
+    background-color: #272930;
+    box-shadow: 4px 5px 17px 4px #db4f56;
+    margin: 0 0 50px;
+}
+
+.logo-icon {
+  width: 40px; /* Adjust the size of the logo */
+  height: auto;
+}
+
+.header a {
+    /* color: rgb(255, 255, 255);  */
+    text-decoration: none;
+    margin: 0 8px;
+    font-weight: bold;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* Irminsul Studio Buttons */ 
+
+.studio-button {
+    font-size: 18px;
+    color: #e1e1e1;
+    font-family: inherit;
+    font-weight: 800;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: color;
+}
+  
+.studio-button:focus,
+.studio-button:hover {
+    color: #fff;
+}
+  
+.studio-button:focus:after,
+.studio-button:hover:after {
+   width: 100%;
+   left: 0%;
+}
+  
+.studio-button:after {
+    content: "";
+    pointer-events: none;
+    bottom: -2px;
+    left: 50%;
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #d67c7c;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: width, left;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* Header-Pages button */ 
+
+.homepage-button {
+    color: #ecf0f1;
+    font-size: 17px;
+    background-color: #212121;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 6px 0px #d67c7c;
+    transition: all 50ms;
+    width: 120px;
+}
+   
+.homepage-button:active {
+    box-shadow: 0px 2px 0px #d67c7c ;
+    position: relative;
+    top: 2px;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* Sign up & Log in button */
+
+.register-button {
+    color: #ecf0f1;
+    font-size: 17px;
+    background-color: #212121;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 6px 0px #787878;
+    transition: all 50ms;
+    width: 120px;
+}
+   
+.register-button:active {
+    box-shadow: 0px 2px 0px #787878;
+    position: relative;
+    top: 2px;
+}
+
+/* Log out button */
+
+.log-out-button {
+    color: #ecf0f1 !important;
+    font-size: 17px;
+    background-color: #212121;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 6px 0px #787878;
+    transition: all 50ms;
+    width: 120px;
+    height: 50px;
+    margin: auto 20px;
+    text-align: center;
+}
+
+.log-out-button:active {
+    box-shadow: 0px 2px 0px #787878;
+    position: relative;
+    top: 2px;
+}
+
+/* Prevent text color from changing */
+.log-out-button:hover,
+.log-out-button:focus {
+    color: #ecf0f1 !important;
+    background-color: #212121;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    background-color: transparent !important; /* Removes the white background */
+    border: none !important; /* Removes border if any */
+    box-shadow: none !important; /* Ensures no extra shadow */
+    padding: 0 20px !important; /* Removes extra spacing */
+    margin: 0 !important;
+}
+
+/* Keep dropdown visible when hovering */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Sign Out Button Styling */
+.dropdown-menu a {
+    color: black !important; /* Fixes darkening issue */
+    font-weight: bold;
+    padding: 8px 15px;
+    display: block;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: #f5f5f5;
+}
+
+/* Sign Out Button (Styled Like Register Button) */
+.sign-out-button {
+    color: #ecf0f1; /* Light text */
+    font-size: 17px;
+    background-color: #212121;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 6px 0px #787878;
+    transition: all 50ms;
+    width: 120px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px; /* Spacing from dropdown */
+}
+
+/* Active (Click) Effect */
+.sign-out-button:active {
+    box-shadow: 0px 2px 0px #787878;
+    position: relative;
+    top: 2px;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* Contact Section */
+
+.contact-section {
+    padding: 80px 20px;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+/* Left: Contact Info */
+
+.contact-info {
+    padding: 40px 0;
+}
+
+.contact-heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.contact-heading h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.contact-star {
+    font-size: 1.5rem;
+    color: #ffd700;
+}
+
+.contact-subtitle {
+    color: #aaa;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 450px;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 22px 25px;
+    background: #272930;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.contact-item:hover {
+    border-color: #db4f56;
+    transform: translateX(5px);
+}
+
+.contact-item-icon {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    background: #212121;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #db4f56;
+}
+
+.contact-item h4 {
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+}
+
+.contact-item p {
+    color: #999;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Right: Contact Form */
+
+.contact-form-wrapper {
+    background: #272930;
+    padding: 40px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.contact-form-wrapper h3 {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0 0 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #db4f56;
+}
+
+/* Form Groups */
+
+.contact-form-wrapper .form-group {
+    margin-bottom: 22px;
+}
+
+.contact-form-wrapper label {
+    display: block;
+    color: #ccc;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-form-wrapper label span {
+    color: #666;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.contact-form-wrapper input,
+.contact-form-wrapper textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: #212121;
+    border: 1px solid #333;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.contact-form-wrapper input:focus,
+.contact-form-wrapper textarea:focus {
+    border-color: #db4f56;
+}
+
+.contact-form-wrapper input::placeholder,
+.contact-form-wrapper textarea::placeholder {
+    color: #555;
+}
+
+.contact-form-wrapper textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+/* Send message button */ 
+
+.send-message-button {
+    color: #ecf0f1;
+    font-size: 16px;
+    background-color: #212121;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    padding: 14px 35px;
+    box-shadow: 0px 6px 0px #d67c7c;
+    transition: all 80ms;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+ 
+.send-message-button:active {
+    box-shadow: 0px 2px 0px #d67c7c;
+    position: relative;
+    top: 2px;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .contact-info {
+        padding: 20px 0;
+    }
+
+    .contact-form-wrapper {
+        padding: 25px;
+    }
+
+    .contact-heading h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* Footer Section */
+
+.footer {
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background-color: #272930;
+    box-shadow: 4px 5px 17px 4px #db4f56;
+}
+
+.footer p {
+    /* color: rgb(255, 255, 255); */
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+}
+
+.copyright {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    border: none;
+    background: none;
+    font-weight: 750;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 15px; /* Adjust space between loader and text */
+  }
+  
+.copyright::before {
+    margin-left: auto;
+  }
+  
+.copyright::after, .copyright::before {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #f44336;
+    display: block;
+    transition: 0.5s;
+  }
+  
+.copyright:hover::after, .copyright:hover::before {
+    width: 100%;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Pushes content to the right */
+  width: 100%;
+}
+
+/* Administrator Button */ 
+
+.admin-dashboard-button {
+  padding: 0.1em 0.25em;
+  width: 16em;
+  height: 4.2em;
+  background-color: #212121;
+  border: 0.08em solid #fff;
+  border-radius: 0.3em;
+  font-size: 11px;
+  cursor: pointer;
+  margin-left: auto; /* Pushes everything else to the right */
+  margin-right: 20px;
+}
+
+.admin-dashboard-button span {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0.4em;
+  width: 11em; /* Increased width to fit text */
+  height: 2.5em;
+  background-color: #212121;
+  border-radius: 0.2em;
+  font-weight: bold; /* Make it bold */
+  font-size: 1.4em; /* Keeping size balanced */
+  color: #fff;
+  border: 0.08em solid #fff;
+  box-shadow: 0 0.4em 0.1em 0.019em #fff;
+}
+
+.admin-dashboard-button span:hover {
+  transition: all 0.5s;
+  transform: translate(0, 0.4em);
+  box-shadow: 0 0 0 0 #fff;
+}
+
+.admin-dashboard-button span:not(hover) {
+  transition: all 1s;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+/* Copyright animation */
+
+.configure-border-1 {
+    width: 25px;
+    height: 25px;
+    padding: 1.5px;
+    position: absolute;
+    margin-right: 1500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fb5b53;
+    animation: configure-clockwise 3s ease-in-out 0s infinite alternate;
+}
+  
+.configure-border-2 {
+    width: 25px;
+    height: 25px;
+    padding: 1.5px;
+    left: -25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(63, 249, 220);
+    transform: rotate(45deg);
+    animation: configure-xclockwise 3s ease-in-out 0s infinite alternate;
+}
+  
+.configure-core {
+    width: 100%;
+    height: 100%;
+    background-color: #1d2630;
+}
+  
+@keyframes configure-clockwise {
+    0% {
+      transform: rotate(0);
+    }
+    25% {
+      transform: rotate(90deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    75% {
+      transform: rotate(270deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+@keyframes configure-xclockwise {
+    0% {
+      transform: rotate(45deg);
+    }
+    25% {
+      transform: rotate(-45deg);
+    }
+    50% {
+      transform: rotate(-135deg);
+    }
+    75% {
+      transform: rotate(-225deg);
+    }
+    100% {
+      transform: rotate(-315deg);
+    }
+}
+  
+/* ------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+/* Social Media's Section */
+
+.social-media-buttons {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: none;
+    position: relative;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    transition: 0.1s;
+}
+
+/* Icon Styling */
+.social-media-buttons img {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Instagram Button */
+.instagram {
+    background: linear-gradient(120deg, #833ab4, #fd1d1d, #fcb045);
+}
+
+/* YouTube Button */
+.youtube {
+    background: linear-gradient(120deg, #ff0000, #cc0000); /* YouTube Red */
+}
+
+/* bluesky Button */
+.bluesky {
+    background: linear-gradient(120deg, #87CEEB, #0085ff);
+}
+
+/* Twitter (X) Button */
+.twitter {
+    background: rgb(0, 0, 0);
+}
+
+/* Discord Button */
+.discord {
+    background: #5865F2;
+}
+
+/* Button Click Effect */
+.social-media-buttons:active {
+    transform: scale(0.85);
+}
+
+.social-media-buttons::before {
+    content: "";
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background-color: #272930;
+    border-radius: 50px;
+    z-index: -1;
+    border: 0px solid rgba(255, 255, 255, 0.411);
+    transition: 0.4s;
+}
+
+.social-media-buttons:hover::before {
+    width: 0px;
+    height: 0px;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* header-border Section */
+
+.header-border {
+    width: 37.5px;
+    height: 37.5px;
+    border-left: 1.25px solid #38ff8e;
+    border-radius: 50%;
+    animation: right5231 0.9s linear infinite;
+    margin-top: 15px;
+  }
+  
+  .header-border::before,
+  .header-border::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    display: block;
+    position: absolute;
+    top: calc(50% - 15px);
+    left: calc(50% - 15px);
+    border-right: 1.25px solid #ffbe0b;
+    border-radius: 50%;
+    animation: left036 0.9s linear infinite;
+  }
+  
+  .header-border::after {
+    width: 22.5px;
+    height: 22.5px;
+    top: calc(50% - 11.25px);
+    left: calc(50% - 11.25px);
+    border: 0;
+    border-top: 1.25px solid #ff086e;
+    animation: none;
+  }
+  
+  @keyframes right5231 {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes left036 {
+    from {
+      transform: rotate(720deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+}
+  
+
+
+
+
+
