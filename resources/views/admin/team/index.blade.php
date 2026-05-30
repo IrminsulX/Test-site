@@ -136,14 +136,12 @@
                                 </form>
                             </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4" class="text-center">No team members yet.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
+            @empty
+                <div class="admin-empty">No team members yet. <a href="{{ route('admin.team.create') }}">Add one</a>.</div>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 
         <div class="admin-pagination">
             {{ $teamMembers->links() }}
