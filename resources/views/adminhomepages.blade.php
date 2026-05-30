@@ -7,8 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <title>Irminsul Studio | Administrator Home</title>
+    <title>Irminsul Studio | Administrator</title>
 
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/adminhomepage.css">
     <script src="/js/homepage.js"></script>
     
@@ -19,265 +20,221 @@
     <nav class="header">
         <nav class="navbar navbar-expand-lg">
 
-            <!-- Logo and Brand -->
             <a class="navbar d-flex align-items-center" href="{{ route('home') }}">
                 <img src="{{ asset('images/StudioLogo.png') }}" alt="Studio Logo" class="logo-icon">
                 <button class="studio-button">Irminsul Studio ツ</button>
             </a>
 
-            <!-- Left Side Content (Empty for now) -->
-            <ul class="navbar-nav">
-                <!-- Left Side Content -->
-            </ul>
+            <!-- Hamburger Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavHeader" aria-controls="navbarNavHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
+            <div class="collapse navbar-collapse" id="navbarNavHeader">
+                <ul class="navbar-nav ms-auto">
 
-                <a class="nav-link" href="{{ route('home') }}">
-                    <button class="homepage-button">Home</button>
-                </a>
+                    <a class="nav-link" href="{{ route('home') }}">
+                        <button class="homepage-button">Home</button>
+                    </a>
 
-                <a class="nav-link" href="{{ route('gamespage') }}">
-                    <button class="homepage-button">Games</button>
-                </a>
+                    <a class="nav-link" href="{{ route('gamespage') }}">
+                        <button class="homepage-button">Games</button>
+                    </a>
 
-                <a class="nav-link" href="{{ route('aboutpage') }}">
-                    <button class="homepage-button">About</button>
-                </a>
+                    <a class="nav-link" href="{{ route('aboutpage') }}">
+                        <button class="homepage-button">About</button>
+                    </a>
 
-                <a class="nav-link" href="{{ route('contact') }}">
-                    <button class="homepage-button">Contact</button>
-                </a>
+                    <a class="nav-link" href="{{ route('contact') }}">
+                        <button class="homepage-button">Contact</button>
+                    </a>
 
-                <div class="header-border"></div>
+                    <div class="header-border"></div>
 
-                @guest
-                    @if (Route::has('login'))
-                        <a class="nav-link" href="{{ route('register') }}">
-                            <button class="register-button">Sign up</button>
-                        </a>
-                        
-                        <a class="nav-link" href="{{ route('login') }}">
-                            <button class="register-button">Log in</button>
-                        </a>
-                    @endif
-
-                @else
-                    
-                    <button class="log-out-button nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }}
-                    </button>
-
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <button class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            {{ __('Sign out') }}
+                    @auth
+                        <button class="log-out-button nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
                         </button>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                @endguest
 
-            </ul>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <button class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Sign out') }}
+                            </button>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    @endauth
+
+                </ul>
+            </div>
             
         </nav>
     </nav>
 
-    <!-- Dashboard Image Changer Section -->
-<div class="container">
-    <h2>Dashboard Images</h2>
-
-    <!-- Upload Form -->
-    <form action="{{ url('/upload') }}" method="POST" enctype="multipart/form-data" class="upload-form">
-        @csrf
-        <div class="input-group">
-            <label for="gameNameDashboard">Game Name:</label>
-            <input type="text" name="gameName" id="gameNameDashboard" required placeholder="Enter game name">
+    <!-- Admin Heading -->
+    <div class="admin-heading-section">
+        <div class="admin-heading">
+            <span class="admin-star">&#9733;</span>
+            <h2>ADMIN DASHBOARD</h2>
+            <span class="admin-star">&#9733;</span>
         </div>
-
-        <input type="hidden" name="type" value="dashboard">
-
-        <div class="input-group">
-            <label for="fileUploadDashboard" class="custom-file-upload">
-                <i class="fas fa-upload"></i> Choose Image
-            </label>
-            <input type="file" name="fileUpload" id="fileUploadDashboard" accept=".png, .jpg, .gif, .bmp, .webp" required>
-        </div>
-
-        <button type="submit" class="btn upload-btn">
-            <i class="fas fa-cloud-upload-alt"></i> Upload
-        </button>
-    </form>
-
-    <!-- Success/Error Messages -->
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if(session('error'))
-        <div class="alert alert-error">
-            {{ session('error') }}
-        </div>
-    @endif
-
-    <!-- Display Images -->
-    <div class="image-grid">
-        @foreach (\App\Models\AdminHomepageImages::where('type', 'dashboard')->paginate(10) as $image)
-            <div class="image-card">
-                <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $image->game_name }}" class="image-preview">
-                <p class="game-title">{{ $image->game_name }}</p>
-
-                <!-- Edit Form -->
-                <form action="{{ url('/edit/' . $image->id) }}" method="POST" enctype="multipart/form-data" class="edit-form">
-                    @csrf
-                    <input type="text" name="gameName" value="{{ $image->game_name }}" required>
-                    <input type="file" name="fileUpload" accept=".png, .jpg, .gif, .bmp, .webp">
-                    <button type="submit" class="btn edit-btn">
-                        <i class="fas fa-edit"></i> Edit
-                    </button>
-                </form>
-
-                <!-- Delete Form -->
-                <form action="{{ url('/delete/' . $image->id) }}" method="POST" class="delete-form" onsubmit="return confirmDelete()">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn remove-btn">
-                        <i class="fas fa-trash"></i> Remove
-                    </button>
-                </form>
-            </div>
-        @endforeach
     </div>
 
-    <!-- Pagination -->
-    <div class="pagination">
-        {{ \App\Models\AdminHomepageImages::where('type', 'dashboard')->paginate(10)->links() }}
-    </div>
-</div>
-
-<!-- Loading Spinner -->
-<div id="loadingSpinner" class="spinner">
-    <div class="spinner-icon"></div>
-</div>
-
-
-
-
-    <!-- Games Indicator  -->
-
-    <div class="games-dashboard">
-        <h2>
-            <a href="https://www.roblox.com" target="_blank">
-            <img src="{{ asset('images/HD New Roblox Logo Icon PNG - 800x800.png') }}" alt="Roblox Logo" class="game-icon">
-            </a>
-            Games Available
-        </h2>
-    </div>
-
-   <!-- Featured Games Section -->
-<div class="container games-dashboard-background">
-    <h2>Featured Games</h2>
-
-    <!-- Upload Form -->
-    <form action="{{ url('/upload') }}" method="POST" enctype="multipart/form-data" class="upload-form">
-        @csrf
-        <div class="input-group">
-            <label for="gameNameFeatured">Game Name:</label>
-            <input type="text" name="gameName" id="gameNameFeatured" required placeholder="Enter game name">
+    <!-- Dashboard Images Section -->
+    <div class="admin-section">
+        <div class="admin-section-header">
+            <span class="admin-section-star">&#9733;</span>
+            <h3>Dashboard Images</h3>
+            <span class="admin-section-star">&#9733;</span>
         </div>
 
-        <input type="hidden" name="type" value="featured">
-
-        <div class="input-group">
-            <label for="fileUploadFeatured" class="custom-file-upload">
-                <i class="fas fa-upload"></i> Choose Image
-            </label>
-            <input type="file" name="fileUpload" id="fileUploadFeatured" accept=".png, .jpg, .gif, .bmp, .webp" required>
-        </div>
-
-        <button type="submit" class="btn upload-btn">
-            <i class="fas fa-cloud-upload-alt"></i> Upload
-        </button>
-    </form>
-
-    <!-- Success/Error Messages -->
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if(session('error'))
-        <div class="alert alert-error">
-            {{ session('error') }}
-        </div>
-    @endif
-
-    <!-- Image Management Grid -->
-    <div class="image-grid">
-    @forelse (\App\Models\AdminHomepageImages::where('type', 'featured')->paginate(10) as $image)
-        <div class="image-card">
-            <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $image->game_name }}" class="image-preview">
-            <p class="game-title">{{ $image->game_name }}</p>
-
-            <!-- Edit Form -->
-            <form action="{{ url('/edit/' . $image->id) }}" method="POST" enctype="multipart/form-data" class="edit-form">
+        <div class="admin-card">
+            <form action="{{ url('/upload') }}" method="POST" enctype="multipart/form-data" class="admin-upload-form">
                 @csrf
-                <input type="text" name="gameName" value="{{ $image->game_name }}" required>
-                <input type="file" name="fileUpload" accept=".png, .jpg, .gif, .bmp, .webp">
-                <button type="submit" class="btn edit-btn">
-                    <i class="fas fa-edit"></i> Edit
-                </button>
-            </form>
+                <input type="hidden" name="type" value="dashboard">
 
-            <!-- Delete Form -->
-            <form action="{{ url('/delete/' . $image->id) }}" method="POST" class="delete-form" onsubmit="return confirmDelete()">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn remove-btn">
-                    <i class="fas fa-trash"></i> Remove
-                </button>
+                <div class="admin-form-row">
+                    <div class="admin-form-group">
+                        <label for="gameNameDashboard">Game Name</label>
+                        <input type="text" name="gameName" id="gameNameDashboard" placeholder="Enter game name" required>
+                    </div>
+
+                    <div class="admin-form-group">
+                        <label for="fileUploadDashboard">Image</label>
+                        <div class="admin-file-wrap">
+                            <input type="file" name="fileUpload" id="fileUploadDashboard" accept=".png, .jpg, .gif, .bmp, .webp" required onchange="this.nextElementSibling.textContent = this.files[0].name">
+                            <span class="admin-file-name">No file chosen</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="admin-upload-btn">
+                        <i class="fas fa-cloud-upload-alt"></i> Upload
+                    </button>
+                </div>
             </form>
         </div>
-    @empty
-        <p>No images available</p>
-    @endforelse
-</div>
 
-    <!-- Pagination -->
-    <div class="pagination">
-        {{ \App\Models\AdminHomepageImages::where('type', 'featured')->paginate(10)->links() }}
+        @if(session('success'))
+            <div class="admin-alert admin-alert-success">{{ session('success') }}</div>
+        @endif
+        @if(session('error'))
+            <div class="admin-alert admin-alert-error">{{ session('error') }}</div>
+        @endif
+
+        <div class="admin-grid">
+            @php $dashboardImages = \App\Models\AdminHomepageImages::where('type', 'dashboard')->paginate(10); @endphp
+            @forelse ($dashboardImages as $image)
+                <div class="admin-card admin-image-card">
+                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $image->game_name }}">
+                    <p class="admin-image-title">{{ $image->game_name }}</p>
+
+                    <form action="{{ url('/edit/' . $image->id) }}" method="POST" enctype="multipart/form-data" class="admin-inline-form">
+                        @csrf
+                        <input type="text" name="gameName" value="{{ $image->game_name }}" required>
+                        <div class="admin-file-wrap admin-file-small">
+                            <input type="file" name="fileUpload" id="editDashboard{{ $image->id }}" accept=".png, .jpg, .gif, .bmp, .webp" onchange="this.nextElementSibling.textContent = this.files[0].name">
+                            <span class="admin-file-name">Change image</span>
+                        </div>
+                        <button type="submit" class="admin-btn admin-btn-edit"><i class="fas fa-edit"></i> Edit</button>
+                    </form>
+
+                    <form action="{{ url('/delete/' . $image->id) }}" method="POST" class="admin-inline-form" onsubmit="return confirm('Delete this image?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="admin-btn admin-btn-delete"><i class="fas fa-trash"></i> Remove</button>
+                    </form>
+                </div>
+            @empty
+                <div class="admin-empty">No dashboard images yet. Upload one above.</div>
+            @endforelse
+        </div>
+
+        <div class="admin-pagination">
+            {{ $dashboardImages->links() }}
+        </div>
     </div>
-</div>
 
-<!-- Loading Spinner -->
-<div id="loadingSpinner" class="spinner">
-    <div class="spinner-icon"></div>
-</div>
+    <!-- Featured Games Section -->
+    <div class="admin-section">
+        <div class="admin-section-header">
+            <span class="admin-section-star">&#9733;</span>
+            <h3>Featured Games</h3>
+            <span class="admin-section-star">&#9733;</span>
+        </div>
 
+        <div class="admin-card">
+            <form action="{{ url('/upload') }}" method="POST" enctype="multipart/form-data" class="admin-upload-form">
+                @csrf
+                <input type="hidden" name="type" value="featured">
 
+                <div class="admin-form-row">
+                    <div class="admin-form-group">
+                        <label for="gameNameFeatured">Game Name</label>
+                        <input type="text" name="gameName" id="gameNameFeatured" placeholder="Enter game name" required>
+                    </div>
 
+                    <div class="admin-form-group">
+                        <label for="fileUploadFeatured">Image</label>
+                        <div class="admin-file-wrap">
+                            <input type="file" name="fileUpload" id="fileUploadFeatured" accept=".png, .jpg, .gif, .bmp, .webp" required onchange="this.nextElementSibling.textContent = this.files[0].name">
+                            <span class="admin-file-name">No file chosen</span>
+                        </div>
+                    </div>
 
+                    <button type="submit" class="admin-upload-btn">
+                        <i class="fas fa-cloud-upload-alt"></i> Upload
+                    </button>
+                </div>
+            </form>
+        </div>
 
+        @if(session('success'))
+            <div class="admin-alert admin-alert-success">{{ session('success') }}</div>
+        @endif
+        @if(session('error'))
+            <div class="admin-alert admin-alert-error">{{ session('error') }}</div>
+        @endif
 
+        <div class="admin-grid">
+            @php $featuredImages = \App\Models\AdminHomepageImages::where('type', 'featured')->paginate(10); @endphp
+            @forelse ($featuredImages as $image)
+                <div class="admin-card admin-image-card">
+                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $image->game_name }}">
+                    <p class="admin-image-title">{{ $image->game_name }}</p>
 
+                    <form action="{{ url('/edit/' . $image->id) }}" method="POST" enctype="multipart/form-data" class="admin-inline-form">
+                        @csrf
+                        <input type="text" name="gameName" value="{{ $image->game_name }}" required>
+                        <div class="admin-file-wrap admin-file-small">
+                            <input type="file" name="fileUpload" id="editFeatured{{ $image->id }}" accept=".png, .jpg, .gif, .bmp, .webp" onchange="this.nextElementSibling.textContent = this.files[0].name">
+                            <span class="admin-file-name">Change image</span>
+                        </div>
+                        <button type="submit" class="admin-btn admin-btn-edit"><i class="fas fa-edit"></i> Edit</button>
+                    </form>
 
+                    <form action="{{ url('/delete/' . $image->id) }}" method="POST" class="admin-inline-form" onsubmit="return confirm('Delete this image?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="admin-btn admin-btn-delete"><i class="fas fa-trash"></i> Remove</button>
+                    </form>
+                </div>
+            @empty
+                <div class="admin-empty">No featured games yet. Upload one above.</div>
+            @endforelse
+        </div>
 
-
-
-
-
-
-
+        <div class="admin-pagination">
+            {{ $featuredImages->links() }}
+        </div>
+    </div>
 
     <!-- Footer's section -->
-
     <nav class="footer">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 
-                <!-- Left Side Of Navbar -->
-                <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-collapse" id="navbarNav">
 
                     <button class="social-media-buttons instagram">
                         <a href="https://www.instagram.com" target="_blank">
@@ -309,9 +266,8 @@
                         </a>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Right Side Of Navbar -->
-                        <div class="navbar-container"> 
+                    <div class="ms-auto" id="navbarSupportedContent">
+                        <div class="navbar-container">
 
                             <div class="spinner-box">
                                 <div class="configure-border-1">  
@@ -323,10 +279,10 @@
                             </div>
 
                             <div class="copyright">
-                                © 2025 Irminsul Studio ツ
+                                &copy; 2025 Irminsul Studio ツ
                             </div>
 
-                        </div> 
+                        </div>
 
                     </div>
                     

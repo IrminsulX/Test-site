@@ -26,87 +26,105 @@
                 <button class="studio-button">Irminsul Studio ツ</button>
             </a>
 
-            <!-- Left Side Content (Empty for now) -->
-            <ul class="navbar-nav">
-                <!-- Left Side Content -->
-            </ul>
+            <!-- Hamburger Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavHeader" aria-controls="navbarNavHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
+            <div class="collapse navbar-collapse" id="navbarNavHeader">
+                <ul class="navbar-nav ms-auto">
 
-                <a class="nav-link" href="{{ route('home') }}">
-                    <button class="homepage-button">Home</button>
-                </a>
+                    <a class="nav-link" href="{{ route('home') }}">
+                        <button class="homepage-button">Home</button>
+                    </a>
 
-                <a class="nav-link" href="{{ route('gamespage') }}">
-                    <button class="homepage-button">Games</button>
-                </a>
+                    <a class="nav-link" href="{{ route('gamespage') }}">
+                        <button class="homepage-button">Games</button>
+                    </a>
 
-                <a class="nav-link" href="{{ route('aboutpage') }}">
-                    <button class="homepage-button">About</button>
-                </a>
+                    <a class="nav-link" href="{{ route('aboutpage') }}">
+                        <button class="homepage-button">About</button>
+                    </a>
 
-                <a class="nav-link" href="{{ route('contact') }}">
-                    <button class="homepage-button">Contact</button>
-                </a>
+                    <a class="nav-link" href="{{ route('contact') }}">
+                        <button class="homepage-button">Contact</button>
+                    </a>
 
-                <div class="header-border"></div>
+                    <div class="header-border"></div>
 
-                @guest
-                    @if (Route::has('login'))
-                        <a class="nav-link" href="{{ route('register') }}">
-                            <button class="register-button">Sign up</button>
-                        </a>
+                    @guest
+                        @if (Route::has('login'))
+                            <a class="nav-link" href="{{ route('register') }}">
+                                <button class="register-button">Sign up</button>
+                            </a>
+                            
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <button class="register-button">Log in</button>
+                            </a>
+                        @endif
+
+                    @else
                         
-                        <a class="nav-link" href="{{ route('login') }}">
-                            <button class="register-button">Log in</button>
-                        </a>
-                    @endif
-
-                @else
-                    
-                    <button class="log-out-button nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }}
-                    </button>
-
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <button class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            {{ __('Sign out') }}
+                        <button class="log-out-button nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
                         </button>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                @endguest
 
-            </ul>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <button class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Sign out') }}
+                            </button>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    @endguest
+
+                </ul>
+            </div>
             
         </nav>
     </nav>
 
-    <!-- Dashboard Images Section -->
-    <div class="dashboard-container">
-        <div class="dashboard">
-            @foreach (\App\Models\AdminHomepageImages::all() as $image)
-                <div class="home-image">
+    <!-- Hero Gallery Section -->
+
+    <section class="hero-gallery">
+        <div class="hero-gallery-inner">
+            @forelse (\App\Models\AdminHomepageImages::all() as $image)
+                <div class="hero-item">
                     <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $image->game_name }}">
-                    <p>{{ $image->game_name }}</p>
+                    <div class="hero-item-overlay">
+                        <span>{{ $image->game_name }}</span>
+                    </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="hero-empty">
+                    <div class="hero-empty-icon">&#9733;</div>
+                    <h2>Irminsul Studio</h2>
+                    <p>Games that bring players together</p>
+                </div>
+            @endforelse
         </div>
-    </div>
+    </section>
 
+    <!-- Stats Strip -->
 
-    <div class="games-dashboard">
-        <h2>
-            <a href="https://www.roblox.com" target="_blank">
-            <img src="{{ asset('images/HD New Roblox Logo Icon PNG - 800x800.png') }}" alt="Roblox Logo" class="game-icon">
-            </a>
-            ROBLOX GAMES
-        </h2>
-    </div>
-
-
+    <section class="stats-strip">
+        <div class="stats-item">
+            <span class="stats-number">5+</span>
+            <span class="stats-label">Games Released</span>
+        </div>
+        <div class="stats-divider"></div>
+        <div class="stats-item">
+            <span class="stats-number">10K+</span>
+            <span class="stats-label">Active Players</span>
+        </div>
+        <div class="stats-divider"></div>
+        <div class="stats-item">
+            <span class="stats-number">24/7</span>
+            <span class="stats-label">Community Driven</span>
+        </div>
+    </section>
 
     <!-- Featured Games Section -->
     <div class="featured-section">
@@ -153,14 +171,37 @@
 
 
 
-    <div class="community-dashboard">
-        <h2>
-            <a>
-                <img src="{{ asset('images/StudioLogo.png') }}" alt="Studio Logo" class="logo-icon">
-            </a>
-            COMMUNITY
-        </h2>
-    </div>
+    <!-- Community Section -->
+
+    <section class="community-panel">
+        <div class="community-heading">
+            <span class="community-star">&#9733;</span>
+            <h2>COMMUNITY</h2>
+            <span class="community-star">&#9733;</span>
+        </div>
+        <div class="community-content">
+            <div class="community-text">
+                <p>Join thousands of players in our growing community. Stay connected through Discord and social media for game updates, events, and discussions.</p>
+                <div class="community-links">
+                    <a href="https://discord.com/" target="_blank" class="community-link">
+                        <img src="{{ asset('images/discord-white-icon.png') }}" alt="Discord">
+                        <span>Join Discord</span>
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank" class="community-link">
+                        <img src="{{ asset('images/instagram-white-icon.png') }}" alt="Instagram">
+                        <span>Follow Us</span>
+                    </a>
+                    <a href="https://x.com/?mx=2" target="_blank" class="community-link">
+                        <img src="{{ asset('images/x-social-media-white-icon.png') }}" alt="Twitter">
+                        <span>Twitter</span>
+                    </a>
+                </div>
+            </div>
+            <div class="community-brand">
+                <img src="{{ asset('images/StudioLogo.png') }}" alt="Irminsul Studio">
+            </div>
+        </div>
+    </section>
 
     
 
@@ -170,8 +211,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 
-                <!-- Left Side Of Navbar -->
-                <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-collapse" id="navbarNav">
 
                     <button class="social-media-buttons instagram">
                         <a href="https://www.instagram.com" target="_blank">
@@ -203,14 +243,12 @@
                         </a>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Right Side Of Navbar -->
+                    <div class="ms-auto" id="navbarSupportedContent">
                         <div class="navbar-container"> 
 
                             @auth
                                 @if(auth()->user()->isAdmin())
                                     <a href="{{ route('adminhomepages') }}">
-                                        <!-- Administrator Page Button --> 
                                         <button class="admin-dashboard-button">
                                             <span> Administrator Page </span>
                                         </button>

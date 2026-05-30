@@ -23,60 +23,62 @@
                 <button class="studio-button">Irminsul Studio ツ</button>
             </a>
 
-            <!-- Left Side Content (Empty for now) -->
-            <ul class="navbar-nav">
-                <!-- Left Side Content -->
-            </ul>
+            <!-- Hamburger Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavHeader" aria-controls="navbarNavHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
+            <div class="collapse navbar-collapse" id="navbarNavHeader">
+                <ul class="navbar-nav ms-auto">
 
-                <a class="nav-link" href="{{ route('home') }}">
-                    <button class="homepage-button">Home</button>
-                </a>
+                    <a class="nav-link" href="{{ route('home') }}">
+                        <button class="homepage-button">Home</button>
+                    </a>
 
-                <a class="nav-link" href="{{ route('gamespage') }}">
-                    <button class="homepage-button">Games</button>
-                </a>
+                    <a class="nav-link" href="{{ route('gamespage') }}">
+                        <button class="homepage-button">Games</button>
+                    </a>
 
-                <a class="nav-link" href="{{ route('aboutpage') }}">
-                    <button class="homepage-button">About</button>
-                </a>
+                    <a class="nav-link" href="{{ route('aboutpage') }}">
+                        <button class="homepage-button">About</button>
+                    </a>
 
-                <a class="nav-link" href="{{ route('contact') }}">
-                    <button class="homepage-button">Contact</button>
-                </a>
+                    <a class="nav-link" href="{{ route('contact') }}">
+                        <button class="homepage-button">Contact</button>
+                    </a>
 
-                <div class="header-border"></div>
+                    <div class="header-border"></div>
 
-                @guest
-                    @if (Route::has('login'))
-                        <a class="nav-link" href="{{ route('register') }}">
-                            <button class="register-button">Sign up</button>
-                        </a>
+                    @guest
+                        @if (Route::has('login'))
+                            <a class="nav-link" href="{{ route('register') }}">
+                                <button class="register-button">Sign up</button>
+                            </a>
+                            
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <button class="register-button">Log in</button>
+                            </a>
+                        @endif
+
+                    @else
                         
-                        <a class="nav-link" href="{{ route('login') }}">
-                            <button class="register-button">Log in</button>
-                        </a>
-                    @endif
-
-                @else
-                    
-                    <button class="log-out-button nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }}
-                    </button>
-
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <button class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            {{ __('Sign out') }}
+                        <button class="log-out-button nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
                         </button>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                @endguest
 
-            </ul>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <button class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Sign out') }}
+                            </button>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    @endguest
+
+                </ul>
+            </div>
             
         </nav>
     </nav>
@@ -156,8 +158,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 
-                <!-- Left Side Of Navbar -->
-                <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-collapse" id="navbarNav">
 
                     <button class="social-media-buttons instagram">
                         <a href="https://www.instagram.com" target="_blank">
@@ -189,11 +190,9 @@
                         </a>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Right Side Of Navbar -->
-                        <div class="navbar-container"> <!-- Changed from <ul> to <div> -->
+                    <div class="ms-auto" id="navbarSupportedContent">
+                        <div class="navbar-container">
 
-                            <!-- Administrator Page Button --> 
                             @auth
                                 @if(auth()->user()->isAdmin())
                                     <a href="{{ route('adminhomepages') }}">
@@ -217,7 +216,7 @@
                                 © 2025 Irminsul Studio ツ
                             </div>
 
-                        </div> <!-- Closed the div -->
+                        </div>
 
                     </div>
                     
