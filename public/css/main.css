@@ -838,29 +838,29 @@ body {
     padding: 0;
 }
 
-.admin-nav-button span {
-    width: 6em;
-    height: 2em;
-    font-size: 1em;
-    bottom: 0;
-    box-shadow: 0 0.3em 0.1em 0.019em #fff;
-}
-  
 .admin-dashboard-button span {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     bottom: 0.4em;
-    width: 11em; /* Increased width to fit text */
+    width: 11em;
     height: 2.5em;
     background-color: #212121;
     border-radius: 0.2em;
-    font-weight: bold; /* Make it bold */
-    font-size: 1.4em; /* Keeping size balanced */
+    font-weight: bold;
+    font-size: 1.4em;
     color: #fff;
     border: 0.08em solid #fff;
     box-shadow: 0 0.4em 0.1em 0.019em #fff;
+}
+
+.admin-nav-button span {
+    width: 6em;
+    height: 2em;
+    font-size: 1em;
+    bottom: 0;
+    box-shadow: 0 0.3em 0.1em 0.019em #fff;
 }
   
 .admin-dashboard-button span:hover {
@@ -1291,19 +1291,20 @@ body {
         width: 7em;
         height: 2.8em;
         font-size: 8px;
+        margin-left: 0;
         margin-right: 0;
-    }
-
-    .admin-nav-button span {
-        width: 6em;
-        height: 2em;
-        font-size: 1em;
     }
 
     .admin-dashboard-button span {
         width: 9em;
         height: 2em;
         font-size: 1.2em;
+    }
+
+    .admin-nav-button span {
+        width: 6em;
+        height: 2em;
+        font-size: 1em;
     }
 
     .copyright {
