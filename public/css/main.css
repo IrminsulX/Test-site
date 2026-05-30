@@ -808,8 +808,10 @@ body {
 .navbar-container {
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Pushes content to the right */
+    justify-content: flex-end;
     width: 100%;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 /* Administrator Button */ 
@@ -823,8 +825,25 @@ body {
     border-radius: 0.3em;
     font-size: 11px;
     cursor: pointer;
-    margin-left: auto; /* Pushes everything else to the right */
+    margin-left: auto;
     margin-right: 20px;
+}
+
+.admin-nav-button {
+    width: 7em;
+    height: 2.8em;
+    font-size: 10px;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+}
+
+.admin-nav-button span {
+    width: 6em;
+    height: 2em;
+    font-size: 1em;
+    bottom: 0;
+    box-shadow: 0 0.3em 0.1em 0.019em #fff;
 }
   
 .admin-dashboard-button span {
@@ -1266,6 +1285,19 @@ body {
         height: 3.5em;
         font-size: 9px;
         margin-right: 10px;
+    }
+
+    .admin-nav-button {
+        width: 7em;
+        height: 2.8em;
+        font-size: 8px;
+        margin-right: 0;
+    }
+
+    .admin-nav-button span {
+        width: 6em;
+        height: 2em;
+        font-size: 1em;
     }
 
     .admin-dashboard-button span {

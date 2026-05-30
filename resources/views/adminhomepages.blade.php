@@ -278,25 +278,25 @@
                         <div class="navbar-container">
 
                             <a href="{{ route('admin.games.index') }}" style="text-decoration:none;">
-                                <button class="admin-dashboard-button" style="font-size:10px; width:8em; height:3em;">
+                                <button class="admin-dashboard-button admin-nav-button">
                                     <span> Games </span>
                                 </button>
                             </a>
 
                             <a href="{{ route('admin.posts.index') }}" style="text-decoration:none;">
-                                <button class="admin-dashboard-button" style="font-size:10px; width:8em; height:3em;">
+                                <button class="admin-dashboard-button admin-nav-button">
                                     <span> News </span>
                                 </button>
                             </a>
 
                             <a href="{{ route('admin.team.index') }}" style="text-decoration:none;">
-                                <button class="admin-dashboard-button" style="font-size:10px; width:8em; height:3em;">
+                                <button class="admin-dashboard-button admin-nav-button">
                                     <span> Team </span>
                                 </button>
                             </a>
 
                             <a href="{{ route('admin.messages.index') }}" style="text-decoration:none;">
-                                <button class="admin-dashboard-button" style="font-size:10px; width:8em; height:3em;">
+                                <button class="admin-dashboard-button admin-nav-button">
                                     <span> Messages </span>
                                 </button>
                             </a>
