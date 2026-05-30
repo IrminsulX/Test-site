@@ -152,10 +152,10 @@ body {
 
 /* Dropdown Menu */
 .dropdown-menu {
-    background-color: transparent !important; /* Removes the white background */
-    border: none !important; /* Removes border if any */
-    box-shadow: none !important; /* Ensures no extra shadow */
-    padding: 0 20px !important; /* Removes extra spacing */
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 20px !important;
     margin: 0 !important;
 }
 
@@ -165,16 +165,26 @@ body {
 }
 
 /* Sign Out Button Styling */
-.dropdown-menu a {
-    color: black !important; /* Fixes darkening issue */
-    font-weight: bold;
-    padding: 8px 15px;
-    display: block;
+.dropdown-menu a.sign-out-button {
+    color: #ecf0f1 !important;
+    font-size: 17px;
+    background-color: #212121;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 6px 0px #787878;
+    transition: all 50ms;
+    width: 120px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
     text-decoration: none;
 }
 
-.dropdown-menu a:hover {
-    background: #f5f5f5;
+.dropdown-menu a.sign-out-button:hover {
+    background-color: #2a2a2a;
 }
 
 /* Sign Out Button (Styled Like Register Button) */

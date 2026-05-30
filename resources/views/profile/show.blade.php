@@ -6,32 +6,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <title>Irminsul Studio | Games Page</title>
+    <title>Irminsul Studio | {{ $user->name }}</title>
 
-    <link rel="stylesheet" href="css/gamespage.css">
-    <link rel="stylesheet" href="css/main.css">
-    
+    <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+
+    <style>
+        .profile-section {
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-card {
+            max-width: 600px;
+            width: 100%;
+            background: #272930;
+            padding: 40px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        .profile-heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .profile-heading h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .profile-star {
+            font-size: 1.2rem;
+            color: #ffd700;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #db4f56;
+            margin-bottom: 20px;
+            background: #212121;
+        }
+
+        .profile-avatar-placeholder {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #212121;
+            border: 3px solid #db4f56;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #555;
+        }
+
+        .profile-bio {
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .profile-detail {
+            color: #aaa;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .profile-detail a {
+            color: #db4f56;
+            text-decoration: none;
+        }
+
+        .profile-detail a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-detail strong {
+            color: #fff;
+        }
+
+        .edit-profile-button {
+            color: #ecf0f1;
+            font-size: 16px;
+            background-color: #212121;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            padding: 14px 35px;
+            box-shadow: 0px 6px 0px #d67c7c;
+            transition: all 80ms;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin-top: 25px;
+            text-decoration: none;
+        }
+
+        .edit-profile-button:active {
+            box-shadow: 0px 2px 0px #d67c7c;
+            position: relative;
+            top: 2px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Header section -->
     <nav class="header">
         <nav class="navbar navbar-expand-lg">
 
-            <!-- Logo and Brand -->
             <a class="navbar d-flex align-items-center" href="{{ route('home') }}">
                 <img src="{{ asset('images/StudioLogo.png') }}" alt="Studio Logo" class="logo-icon">
                 <button class="studio-button">Irminsul Studio ツ</button>
             </a>
 
-            <!-- Hamburger Toggler -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavHeader" aria-controls="navbarNavHeader" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Right Side Of Navbar -->
             <div class="collapse navbar-collapse" id="navbarNavHeader">
                 <ul class="navbar-nav ms-auto">
 
@@ -66,125 +175,82 @@
                             <a class="nav-link" href="{{ route('register') }}">
                                 <button class="register-button">Sign up</button>
                             </a>
-                            
+
                             <a class="nav-link" href="{{ route('login') }}">
                                 <button class="register-button">Log in</button>
                             </a>
                         @endif
 
                     @else
-                        
+
                         <button class="log-out-button nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </button>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="sign-out-button" href="{{ route('profile.show', Auth::user()) }}">
-                                {{ __('Profile') }}
-                            </a>
-                            <a class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                {{ __('Sign out') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
+                                <a class="sign-out-button" href="{{ route('profile.show', Auth::user()) }}">
+                                    {{ __('Profile') }}
+                                </a>
+                                <a class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Sign out') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
                     @endguest
 
                 </ul>
             </div>
-            
+
         </nav>
     </nav>
 
-    <div class="games-dashboard">
-        <h2>
-            <a href="https://www.roblox.com" target="_blank">
-                <img src="{{ asset('images/HD New Roblox Logo Icon PNG - 800x800.png') }}" alt="Roblox Logo" class="game-icon">
-            </a>
-            ROBLOX GAMES
-        </h2>
-    </div>
-
-    <div class="container games-dashboard-background">
-
-        <!-- 1st Row Left Image Section -->
-        <div class="left-image">
-            <img src="https://via.placeholder.com/100" alt="Left Image">
-        </div>
-
-        <!-- Center Content -->
-        <div class="center-content">
-            <div class="title">TITLE</div>
-            <div class="description"><span>DESCRIPTION</span></div>
-        </div>
-
-        <!-- Right Image Section -->
-        <div class="right-image">
-            <img src="https://via.placeholder.com/100" alt="Right Image">
-        </div>
-        
-        <!-- 2nd Row Left Image Section -->
-        <div class="left-image">
-            <img src="https://via.placeholder.com/100" alt="Left Image">
-        </div>
-
-        <!-- Center Content -->
-        <div class="center-content">
-            <div class="title">TITLE</div>
-            <div class="description"><span>DESCRIPTION</span></div>
-        </div>
-
-        <!-- Right Image Section -->
-        <div class="right-image">
-            <img src="https://via.placeholder.com/100" alt="Right Image">
-        </div>
-
-    </div>
-
-    <!-- Featured Games Section -->
-    <div class="featured-section">
-        <div class="featured-heading">
-            <span class="featured-star">&#9733;</span>
-            <h2>FEATURED GAMES</h2>
-            <span class="featured-star">&#9733;</span>
-        </div>
-
-        <div class="featured-wrapper" id="featuredWrapper">
-            <button class="featured-arrow prev" aria-label="Previous slide">&#10094;</button>
-
-            <div class="featured-slider" id="featuredSlider">
-                @forelse (\App\Models\AdminHomepageImages::where('type', 'featured')->get() as $image)
-                    <div class="featured-slide">
-                        <div class="featured-card-image">
-                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $image->game_name }}" loading="lazy">
-                            <div class="featured-card-overlay">
-                                <h3 class="featured-card-title">{{ $image->game_name }}</h3>
-                                <span class="featured-card-cta">View Game &#10132;</span>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="featured-empty">
-                        <div class="featured-empty-icon">&#9733;</div>
-                        <p>No featured games yet</p>
-                        <span>Check back soon for exciting new releases!</span>
-                    </div>
-                @endforelse
+    <div class="profile-section">
+        <div class="profile-card">
+            <div class="profile-heading">
+                <span class="profile-star">&#9733;</span>
+                <h2>{{ $user->name }}</h2>
+                <span class="profile-star">&#9733;</span>
             </div>
 
-            <button class="featured-arrow next" aria-label="Next slide">&#10095;</button>
+            @if($user->avatar)
+                <img src="{{ asset('storage/' . $user->avatar) }}" alt="{{ $user->name }}" class="profile-avatar">
+            @else
+                <div class="profile-avatar-placeholder">
+                    <i class="fas fa-user"></i>
+                </div>
+            @endif
 
-            <div class="featured-dots" id="featuredDots"></div>
+            @if($user->bio)
+                <p class="profile-bio">{{ $user->bio }}</p>
+            @endif
+
+            <div class="profile-detail"><strong>Joined:</strong> {{ $user->created_at->format('F j, Y') }}</div>
+
+            @if($user->twitter)
+                <div class="profile-detail">
+                    <strong>Twitter:</strong>
+                    <a href="https://twitter.com/{{ $user->twitter }}" target="_blank">@ {{ $user->twitter }}</a>
+                </div>
+            @endif
+
+            @if($user->discord)
+                <div class="profile-detail"><strong>Discord:</strong> {{ $user->discord }}</div>
+            @endif
+
+            @auth
+                @if(auth()->id() === $user->id)
+                    <a href="{{ route('profile.edit') }}" class="edit-profile-button">Edit Profile</a>
+                @endif
+            @endauth
         </div>
     </div>
-
-    <!-- Footer's section -->
 
     <nav class="footer">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                
+
                 <div class="navbar-collapse" id="navbarNav">
 
                     <button class="social-media-buttons instagram">
@@ -231,12 +297,12 @@
                             @endauth
 
                             <div class="spinner-box">
-                                <div class="configure-border-1">  
+                                <div class="configure-border-1">
                                     <div class="configure-core"></div>
-                                </div>  
+                                </div>
                                 <div class="configure-border-2">
                                     <div class="configure-core"></div>
-                                </div> 
+                                </div>
                             </div>
 
                             <div class="copyright">
@@ -246,14 +312,13 @@
                         </div>
 
                     </div>
-                    
+
                 </div>
             </div>
         </nav>
     </nav>
-    
-<script src="/js/homepage.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
 </html>

@@ -28,8 +28,14 @@
                     <a class="nav-link" href="{{ route('home') }}">
                         <button class="homepage-button">Home</button>
                     </a>
-                    <a class="nav-link" href="{{ route('gamespage') }}">
+                    <a class="nav-link" href="{{ route('games.index') }}">
                         <button class="homepage-button">Games</button>
+                    </a>
+                    <a class="nav-link" href="{{ route('posts.index') }}">
+                        <button class="homepage-button">News</button>
+                    </a>
+                    <a class="nav-link" href="{{ route('forum.index') }}">
+                        <button class="homepage-button">Forum</button>
                     </a>
                     <a class="nav-link" href="{{ route('aboutpage') }}">
                         <button class="homepage-button">About</button>
@@ -56,6 +62,9 @@
                             {{ Auth::user()->name }}
                         </button>
                         <div class="dropdown-menu dropdown-menu-end auth-dropdown" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item auth-dropdown-item" href="{{ route('profile.show', Auth::user()) }}">
+                                {{ __('Profile') }}
+                            </a>
                             <a class="dropdown-item auth-dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 {{ __('Sign out') }}

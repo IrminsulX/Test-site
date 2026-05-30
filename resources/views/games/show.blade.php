@@ -7,9 +7,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <title>Irminsul Studio | About us</title>
+    <title>Irminsul Studio | {{ $game->name }}</title>
 
-    <link rel="stylesheet" href="css/aboutpage.css">
+    <link rel="stylesheet" href="css/gamespage.css">
+    <link rel="stylesheet" href="css/main.css">
     
 </head>
 
@@ -78,16 +79,16 @@
                         </button>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="sign-out-button" href="{{ route('profile.show', Auth::user()) }}">
-                                {{ __('Profile') }}
-                            </a>
-                            <a class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                {{ __('Sign out') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
+                                <a class="sign-out-button" href="{{ route('profile.show', Auth::user()) }}">
+                                    {{ __('Profile') }}
+                                </a>
+                                <a class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Sign out') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
                     @endguest
 
                 </ul>
@@ -96,107 +97,65 @@
         </nav>
     </nav>
 
-    <!-- About Studio section -->
-
-    <div class="about-section">
-        <div class="about-heading">
-            <span class="about-star">&#9733;</span>
-            <h2>ABOUT US</h2>
-            <span class="about-star">&#9733;</span>
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <span class="featured-star" style="color: #ffd700; font-size: 2rem;">&#9733;</span>
+            <h2 class="d-inline mx-3" style="color: #fff;">{{ $game->name }}</h2>
+            <span class="featured-star" style="color: #ffd700; font-size: 2rem;">&#9733;</span>
         </div>
 
-        <div class="main-dashboard">
-            <div class="about-container">
-                <div class="about-content">
-                    <h1>Irminsul Studio ツ</h1>
-                    <p class="about-lead">Irminsul Studio is committed to creating engaging, high-quality games that bring players together. We provide frequent updates, listen to player feedback, and foster a community-driven environment where gamers' voices shape the evolution of our games.</p>
-                    <p>At Irminsul Studio, our mission goes beyond creating games — we aim to build a thriving, inclusive, and creative gaming community. Through our games, we provide immersive storytelling, innovative gameplay, and spaces where players can connect, collaborate, and share their experiences.</p>
-                    <p>We actively listen to player feedback, using it to shape game updates and future projects, ensuring that our community's voice drives the evolution of our content. Beyond the games themselves, we foster engagement through interactive events, forums, and social media channels, giving players opportunities to showcase their creativity, share strategies, and participate in discussions that shape the games they love.</p>
-                    <p>Irminsul Studio also believes in empowering aspiring developers and content creators by offering insights into game development, collaborating on community-driven content, and supporting fan-driven projects. Our commitment is to not only entertain but to inspire and uplift the gaming community, creating a space where every player feels valued and involved.</p>
-                </div>
-                <div class="about-image">
-                    <img src="{{ asset('images/StudioLogo.png') }}" alt="Studio Logo">
-                </div>
-            </div>
-        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card mb-4" style="background-color: #272930; border: 1px solid #333; border-radius: 12px; overflow: hidden;">
+                    <img src="{{ $game->featured_image ? asset('storage/' . $game->featured_image) : 'https://via.placeholder.com/800x400?text=No+Image' }}"
+                         alt="{{ $game->name }}"
+                         class="card-img-top"
+                         style="width: 100%; height: auto; object-fit: cover;">
 
-        <div class="about-stats">
-            <div class="stat-card">
-                <span class="stat-number">5+</span>
-                <span class="stat-label">Games Released</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number">10K+</span>
-                <span class="stat-label">Active Players</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number">24/7</span>
-                <span class="stat-label">Community Driven</span>
-            </div>
-        </div>
-    </div>
+                    <div class="card-body">
+                        @php
+                            $statusColors = ['released' => '#28a745', 'beta' => '#fd7e14', 'coming_soon' => '#007bff'];
+                            $statusColor = $statusColors[$game->status] ?? '#6c757d';
+                        @endphp
+                        <span class="badge mb-3" style="background-color: {{ $statusColor }}; color: #fff; font-size: 0.9rem;">
+                            {{ ucfirst(str_replace('_', ' ', $game->status)) }}
+                        </span>
 
-    <!-- Team Sign section -->
+                        <p class="card-text" style="color: #ccc; font-size: 1.1rem; line-height: 1.7;">{{ $game->description }}</p>
 
-    <div class="about-section">
-        <div class="about-heading">
-            <span class="about-star">&#9733;</span>
-            <h2>DEVELOPERS</h2>
-            <span class="about-star">&#9733;</span>
-        </div>
-
-        <div class="devteam-container">
-
-            @forelse ($teamMembers as $member)
-            <div class="devteam-card">
-                <b></b>
-
-                <div class="profile-container">
-                    <img class="profile-img" src="{{ $member->image_path ? asset('storage/' . $member->image_path) : asset('images/StudioLogo.png') }}" alt="{{ $member->name }}">
-                </div>
-
-                <div class="devteam-content">
-                    <p class="title">{{ $member->name }}<br><span>{{ $member->role }}</span></p>
-                    @if($member->instagram || $member->twitter || $member->discord || $member->bluesky)
-                    <ul class="sci">
-                        @if($member->instagram)
-                        <li>
-                            <a href="{{ $member->instagram }}" target="_blank">
-                                <img src="{{ asset('images/instagram-white-icon.png') }}" alt="Instagram">
+                        @if($game->play_url)
+                            <a href="{{ $game->play_url }}" target="_blank" class="btn btn-lg w-100 mt-3" style="background-color: #db4f56; color: #fff; border: none; border-radius: 8px;">
+                                <i class="fas fa-play me-2"></i>Play Now
                             </a>
-                        </li>
                         @endif
-                        @if($member->bluesky)
-                        <li>
-                            <a href="{{ $member->bluesky }}" target="_blank">
-                                <img src="{{ asset('images/bluesky-icon.png') }}" alt="bluesky">
-                            </a>
-                        </li>
-                        @endif
-                        @if($member->twitter)
-                        <li>
-                            <a href="{{ $member->twitter }}" target="_blank">
-                                <img src="{{ asset('images/x-social-media-white-icon.png') }}" alt="twitter">
-                            </a>
-                        </li>
-                        @endif
-                        @if($member->discord)
-                        <li>
-                            <a href="{{ $member->discord }}" target="_blank">
-                                <img src="{{ asset('images/discord-white-icon.png') }}" alt="discord">
-                            </a>
-                        </li>
-                        @endif
-                    </ul>
-                    @endif
+                    </div>
+                </div>
+
+                @if($game->images && $game->images->count() > 0)
+                    <div class="mb-4">
+                        <h4 style="color: #fff; margin-bottom: 1rem;">
+                            <span style="color: #ffd700;">&#9733;</span> Gallery
+                        </h4>
+                        <div class="row g-3">
+                            @foreach($game->images as $image)
+                                <div class="col-md-4 col-sm-6">
+                                    <div style="background-color: #272930; border: 1px solid #333; border-radius: 8px; overflow: hidden;">
+                                        <img src="{{ asset('storage/' . $image->image_path) }}"
+                                             alt="Gallery image"
+                                             style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
+                <div class="text-center mt-4">
+                    <a href="{{ route('games.index') }}" class="btn" style="background-color: #212121; color: #fff; border: 1px solid #444; border-radius: 8px;">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Games
+                    </a>
                 </div>
             </div>
-            @empty
-                <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #888;">
-                    <p>No team members listed yet.</p>
-                </div>
-            @endforelse
-
         </div>
     </div>
 
@@ -228,7 +187,7 @@
 
                     <button class="social-media-buttons discord">
                         <a href="https://discord.com/" target="_blank">
-                            <img src="{{ asset('images/discord-white-icon.png') }}" alt="discord">
+                            <img src="{{ asset('images/discord-white-icon.png') }}" alt="twitter">
                         </a>
                     </button>
 
@@ -269,24 +228,11 @@
                     </div>
                     
                 </div>
-                                <div class="configure-border-2">
-                                    <div class="configure-core"></div>
-                                </div> 
-                            </div>
-
-                            <div class="copyright">
-                                © 2025 Irminsul Studio ツ
-                            </div>
-
-                        </div> <!-- Closed the div -->
-
-                    </div>
-                    
-                </div>
             </div>
         </nav>
     </nav>
     
+<script src="/js/homepage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>

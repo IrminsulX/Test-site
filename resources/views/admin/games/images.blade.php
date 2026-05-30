@@ -6,32 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <title>Irminsul Studio | Games Page</title>
 
-    <link rel="stylesheet" href="css/gamespage.css">
-    <link rel="stylesheet" href="css/main.css">
-    
+    <title>Irminsul Studio | Game Images</title>
+
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/adminhomepage.css') }}">
+
 </head>
-
 <body>
 
-    <!-- Header section -->
     <nav class="header">
         <nav class="navbar navbar-expand-lg">
 
-            <!-- Logo and Brand -->
             <a class="navbar d-flex align-items-center" href="{{ route('home') }}">
                 <img src="{{ asset('images/StudioLogo.png') }}" alt="Studio Logo" class="logo-icon">
                 <button class="studio-button">Irminsul Studio ツ</button>
             </a>
 
-            <!-- Hamburger Toggler -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavHeader" aria-controls="navbarNavHeader" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Right Side Of Navbar -->
             <div class="collapse navbar-collapse" id="navbarNavHeader">
                 <ul class="navbar-nav ms-auto">
 
@@ -61,130 +56,109 @@
 
                     <div class="header-border"></div>
 
-                    @guest
-                        @if (Route::has('login'))
-                            <a class="nav-link" href="{{ route('register') }}">
-                                <button class="register-button">Sign up</button>
-                            </a>
-                            
-                            <a class="nav-link" href="{{ route('login') }}">
-                                <button class="register-button">Log in</button>
-                            </a>
-                        @endif
-
-                    @else
-                        
+                    @auth
                         <button class="log-out-button nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </button>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="sign-out-button" href="{{ route('profile.show', Auth::user()) }}">
-                                {{ __('Profile') }}
-                            </a>
-                            <a class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                {{ __('Sign out') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    @endguest
+                                <a class="sign-out-button" href="{{ route('profile.show', Auth::user()) }}">
+                                    {{ __('Profile') }}
+                                </a>
+                                <a class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Sign out') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                    @endauth
 
                 </ul>
             </div>
-            
+
         </nav>
     </nav>
 
-    <div class="games-dashboard">
-        <h2>
-            <a href="https://www.roblox.com" target="_blank">
-                <img src="{{ asset('images/HD New Roblox Logo Icon PNG - 800x800.png') }}" alt="Roblox Logo" class="game-icon">
-            </a>
-            ROBLOX GAMES
-        </h2>
+    <div class="admin-heading-section">
+        <div class="admin-heading">
+            <span class="admin-star">&#9733;</span>
+            <h2>GAME IMAGES</h2>
+            <span class="admin-star">&#9733;</span>
+        </div>
     </div>
 
-    <div class="container games-dashboard-background">
+    @if(session('success'))
+        <div class="admin-alert admin-alert-success">{{ session('success') }}</div>
+    @endif
 
-        <!-- 1st Row Left Image Section -->
-        <div class="left-image">
-            <img src="https://via.placeholder.com/100" alt="Left Image">
+    @if(session('error'))
+        <div class="admin-alert admin-alert-error">{{ session('error') }}</div>
+    @endif
+
+    <div class="admin-section">
+        <div class="admin-section-header">
+            <span class="admin-section-star">&#9733;</span>
+            <h3>{{ $game->name }} &mdash; Gallery</h3>
+            <span class="admin-section-star">&#9733;</span>
         </div>
 
-        <!-- Center Content -->
-        <div class="center-content">
-            <div class="title">TITLE</div>
-            <div class="description"><span>DESCRIPTION</span></div>
-        </div>
+        <div class="admin-card">
+            <form action="{{ route('admin.games.uploadImage', $game->id) }}" method="POST" enctype="multipart/form-data" class="admin-upload-form">
+                @csrf
 
-        <!-- Right Image Section -->
-        <div class="right-image">
-            <img src="https://via.placeholder.com/100" alt="Right Image">
-        </div>
-        
-        <!-- 2nd Row Left Image Section -->
-        <div class="left-image">
-            <img src="https://via.placeholder.com/100" alt="Left Image">
-        </div>
-
-        <!-- Center Content -->
-        <div class="center-content">
-            <div class="title">TITLE</div>
-            <div class="description"><span>DESCRIPTION</span></div>
-        </div>
-
-        <!-- Right Image Section -->
-        <div class="right-image">
-            <img src="https://via.placeholder.com/100" alt="Right Image">
-        </div>
-
-    </div>
-
-    <!-- Featured Games Section -->
-    <div class="featured-section">
-        <div class="featured-heading">
-            <span class="featured-star">&#9733;</span>
-            <h2>FEATURED GAMES</h2>
-            <span class="featured-star">&#9733;</span>
-        </div>
-
-        <div class="featured-wrapper" id="featuredWrapper">
-            <button class="featured-arrow prev" aria-label="Previous slide">&#10094;</button>
-
-            <div class="featured-slider" id="featuredSlider">
-                @forelse (\App\Models\AdminHomepageImages::where('type', 'featured')->get() as $image)
-                    <div class="featured-slide">
-                        <div class="featured-card-image">
-                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $image->game_name }}" loading="lazy">
-                            <div class="featured-card-overlay">
-                                <h3 class="featured-card-title">{{ $image->game_name }}</h3>
-                                <span class="featured-card-cta">View Game &#10132;</span>
-                            </div>
+                <div class="admin-form-row">
+                    <div class="admin-form-group">
+                        <label for="image">Image</label>
+                        <div class="admin-file-wrap">
+                            <input type="file" name="image" id="image" accept=".png, .jpg, .gif, .bmp, .webp" required onchange="this.nextElementSibling.textContent = this.files[0].name">
+                            <span class="admin-file-name">No file chosen</span>
                         </div>
                     </div>
-                @empty
-                    <div class="featured-empty">
-                        <div class="featured-empty-icon">&#9733;</div>
-                        <p>No featured games yet</p>
-                        <span>Check back soon for exciting new releases!</span>
+
+                    <div class="admin-form-group">
+                        <label for="caption">Caption</label>
+                        <input type="text" name="caption" id="caption" placeholder="Optional caption">
                     </div>
-                @endforelse
-            </div>
 
-            <button class="featured-arrow next" aria-label="Next slide">&#10095;</button>
+                    <button type="submit" class="admin-upload-btn"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
+                </div>
+            </form>
+        </div>
 
-            <div class="featured-dots" id="featuredDots"></div>
+        <div class="admin-grid">
+            @forelse ($game->images as $image)
+                <div class="admin-card admin-image-card">
+                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $image->caption ?? 'Game image' }}">
+                    @if($image->caption)
+                        <p class="admin-image-title">{{ $image->caption }}</p>
+                    @endif
+
+                    <form action="{{ route('admin.games.deleteImage', [$game->id, $image->id]) }}" method="POST" class="admin-inline-form" onsubmit="return confirm('Delete this image?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="admin-btn admin-btn-delete"><i class="fas fa-trash"></i> Delete</button>
+                    </form>
+                </div>
+            @empty
+                <div class="admin-empty">No images yet. Upload one above.</div>
+            @endforelse
+        </div>
+
+        <div class="mt-3">
+            <a href="{{ route('admin.games.index') }}">
+                <button class="admin-btn admin-btn-edit"><i class="fas fa-arrow-left"></i> Back to Games</button>
+            </a>
+            <a href="{{ route('admin.games.edit', $game->id) }}">
+                <button class="admin-btn admin-btn-edit"><i class="fas fa-edit"></i> Edit Game</button>
+            </a>
         </div>
     </div>
-
-    <!-- Footer's section -->
 
     <nav class="footer">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                
+
                 <div class="navbar-collapse" id="navbarNav">
 
                     <button class="social-media-buttons instagram">
@@ -220,39 +194,28 @@
                     <div class="ms-auto" id="navbarSupportedContent">
                         <div class="navbar-container">
 
-                            @auth
-                                @if(auth()->user()->isAdmin())
-                                    <a href="{{ route('adminhomepages') }}">
-                                        <button class="admin-dashboard-button">
-                                            <span> Administrator Page </span>
-                                        </button>
-                                    </a>
-                                @endif
-                            @endauth
-
                             <div class="spinner-box">
-                                <div class="configure-border-1">  
+                                <div class="configure-border-1">
                                     <div class="configure-core"></div>
-                                </div>  
+                                </div>
                                 <div class="configure-border-2">
                                     <div class="configure-core"></div>
-                                </div> 
+                                </div>
                             </div>
 
                             <div class="copyright">
-                                © 2025 Irminsul Studio ツ
+                                &copy; 2025 Irminsul Studio ツ
                             </div>
 
                         </div>
 
                     </div>
-                    
+
                 </div>
             </div>
         </nav>
     </nav>
-    
-<script src="/js/homepage.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>

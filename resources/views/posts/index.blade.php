@@ -7,9 +7,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <title>Irminsul Studio | About us</title>
+    <title>Irminsul Studio | News & Updates</title>
 
-    <link rel="stylesheet" href="css/aboutpage.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/main.css">
     
 </head>
 
@@ -78,16 +79,16 @@
                         </button>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="sign-out-button" href="{{ route('profile.show', Auth::user()) }}">
-                                {{ __('Profile') }}
-                            </a>
-                            <a class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                {{ __('Sign out') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
+                                <a class="sign-out-button" href="{{ route('profile.show', Auth::user()) }}">
+                                    {{ __('Profile') }}
+                                </a>
+                                <a class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Sign out') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
                     @endguest
 
                 </ul>
@@ -96,107 +97,57 @@
         </nav>
     </nav>
 
-    <!-- About Studio section -->
-
-    <div class="about-section">
-        <div class="about-heading">
-            <span class="about-star">&#9733;</span>
-            <h2>ABOUT US</h2>
-            <span class="about-star">&#9733;</span>
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <span class="featured-star" style="color: #ffd700; font-size: 2rem;">&#9733;</span>
+            <h2 class="d-inline mx-3" style="color: #fff;">NEWS & UPDATES</h2>
+            <span class="featured-star" style="color: #ffd700; font-size: 2rem;">&#9733;</span>
         </div>
 
-        <div class="main-dashboard">
-            <div class="about-container">
-                <div class="about-content">
-                    <h1>Irminsul Studio ツ</h1>
-                    <p class="about-lead">Irminsul Studio is committed to creating engaging, high-quality games that bring players together. We provide frequent updates, listen to player feedback, and foster a community-driven environment where gamers' voices shape the evolution of our games.</p>
-                    <p>At Irminsul Studio, our mission goes beyond creating games — we aim to build a thriving, inclusive, and creative gaming community. Through our games, we provide immersive storytelling, innovative gameplay, and spaces where players can connect, collaborate, and share their experiences.</p>
-                    <p>We actively listen to player feedback, using it to shape game updates and future projects, ensuring that our community's voice drives the evolution of our content. Beyond the games themselves, we foster engagement through interactive events, forums, and social media channels, giving players opportunities to showcase their creativity, share strategies, and participate in discussions that shape the games they love.</p>
-                    <p>Irminsul Studio also believes in empowering aspiring developers and content creators by offering insights into game development, collaborating on community-driven content, and supporting fan-driven projects. Our commitment is to not only entertain but to inspire and uplift the gaming community, creating a space where every player feels valued and involved.</p>
-                </div>
-                <div class="about-image">
-                    <img src="{{ asset('images/StudioLogo.png') }}" alt="Studio Logo">
-                </div>
-            </div>
-        </div>
+        <div class="row g-4">
+            @forelse($posts as $post)
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100" style="background-color: #272930; border: 1px solid #333; border-radius: 12px; overflow: hidden;">
+                        <img src="{{ $post->featured_image ? asset('storage/' . $post->featured_image) : 'https://via.placeholder.com/400x250?text=No+Image' }}"
+                             alt="{{ $post->title }}"
+                             class="card-img-top"
+                             style="height: 200px; object-fit: cover;">
 
-        <div class="about-stats">
-            <div class="stat-card">
-                <span class="stat-number">5+</span>
-                <span class="stat-label">Games Released</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number">10K+</span>
-                <span class="stat-label">Active Players</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number">24/7</span>
-                <span class="stat-label">Community Driven</span>
-            </div>
-        </div>
-    </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title" style="color: #fff;">{{ $post->title }}</h5>
 
-    <!-- Team Sign section -->
+                            <p class="card-text flex-grow-1" style="color: #aaa;">
+                                {{ Str::limit($post->excerpt, 120) }}
+                            </p>
 
-    <div class="about-section">
-        <div class="about-heading">
-            <span class="about-star">&#9733;</span>
-            <h2>DEVELOPERS</h2>
-            <span class="about-star">&#9733;</span>
-        </div>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <small style="color: #777;">
+                                    <i class="far fa-calendar-alt me-1"></i>{{ $post->published_at->format('M d, Y') }}
+                                </small>
+                                @if($post->author)
+                                    <small style="color: #777;">
+                                        <i class="far fa-user me-1"></i>{{ $post->author }}
+                                    </small>
+                                @endif
+                            </div>
 
-        <div class="devteam-container">
-
-            @forelse ($teamMembers as $member)
-            <div class="devteam-card">
-                <b></b>
-
-                <div class="profile-container">
-                    <img class="profile-img" src="{{ $member->image_path ? asset('storage/' . $member->image_path) : asset('images/StudioLogo.png') }}" alt="{{ $member->name }}">
-                </div>
-
-                <div class="devteam-content">
-                    <p class="title">{{ $member->name }}<br><span>{{ $member->role }}</span></p>
-                    @if($member->instagram || $member->twitter || $member->discord || $member->bluesky)
-                    <ul class="sci">
-                        @if($member->instagram)
-                        <li>
-                            <a href="{{ $member->instagram }}" target="_blank">
-                                <img src="{{ asset('images/instagram-white-icon.png') }}" alt="Instagram">
+                            <a href="{{ route('posts.show', $post) }}" class="btn w-100 mt-3" style="background-color: #212121; color: #fff; border: 1px solid #444; border-radius: 8px;">
+                                Read More
                             </a>
-                        </li>
-                        @endif
-                        @if($member->bluesky)
-                        <li>
-                            <a href="{{ $member->bluesky }}" target="_blank">
-                                <img src="{{ asset('images/bluesky-icon.png') }}" alt="bluesky">
-                            </a>
-                        </li>
-                        @endif
-                        @if($member->twitter)
-                        <li>
-                            <a href="{{ $member->twitter }}" target="_blank">
-                                <img src="{{ asset('images/x-social-media-white-icon.png') }}" alt="twitter">
-                            </a>
-                        </li>
-                        @endif
-                        @if($member->discord)
-                        <li>
-                            <a href="{{ $member->discord }}" target="_blank">
-                                <img src="{{ asset('images/discord-white-icon.png') }}" alt="discord">
-                            </a>
-                        </li>
-                        @endif
-                    </ul>
-                    @endif
+                        </div>
+                    </div>
                 </div>
-            </div>
             @empty
-                <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #888;">
-                    <p>No team members listed yet.</p>
+                <div class="col-12 text-center py-5">
+                    <div style="font-size: 3rem; color: #ffd700;">&#9733;</div>
+                    <p style="color: #aaa; font-size: 1.2rem; margin-top: 1rem;">No news posts yet</p>
+                    <span style="color: #777;">Check back soon for updates!</span>
                 </div>
             @endforelse
+        </div>
 
+        <div class="d-flex justify-content-center mt-4">
+            {{ $posts->links() }}
         </div>
     </div>
 
@@ -228,7 +179,7 @@
 
                     <button class="social-media-buttons discord">
                         <a href="https://discord.com/" target="_blank">
-                            <img src="{{ asset('images/discord-white-icon.png') }}" alt="discord">
+                            <img src="{{ asset('images/discord-white-icon.png') }}" alt="twitter">
                         </a>
                     </button>
 
@@ -265,20 +216,6 @@
                             </div>
 
                         </div>
-
-                    </div>
-                    
-                </div>
-                                <div class="configure-border-2">
-                                    <div class="configure-core"></div>
-                                </div> 
-                            </div>
-
-                            <div class="copyright">
-                                © 2025 Irminsul Studio ツ
-                            </div>
-
-                        </div> <!-- Closed the div -->
 
                     </div>
                     

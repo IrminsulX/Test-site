@@ -37,8 +37,16 @@
                         <button class="homepage-button">Home</button>
                     </a>
 
-                    <a class="nav-link" href="{{ route('gamespage') }}">
+                    <a class="nav-link" href="{{ route('games.index') }}">
                         <button class="homepage-button">Games</button>
+                    </a>
+
+                    <a class="nav-link" href="{{ route('posts.index') }}">
+                        <button class="homepage-button">News</button>
+                    </a>
+
+                    <a class="nav-link" href="{{ route('forum.index') }}">
+                        <button class="homepage-button">Forum</button>
                     </a>
 
                     <a class="nav-link" href="{{ route('aboutpage') }}">
@@ -57,9 +65,9 @@
                         </button>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <button class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 {{ __('Sign out') }}
-                            </button>
+                            </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -268,6 +276,30 @@
 
                     <div class="ms-auto" id="navbarSupportedContent">
                         <div class="navbar-container">
+
+                            <a href="{{ route('admin.games.index') }}" style="text-decoration:none;">
+                                <button class="admin-dashboard-button" style="font-size:10px; width:8em; height:3em;">
+                                    <span> Games </span>
+                                </button>
+                            </a>
+
+                            <a href="{{ route('admin.posts.index') }}" style="text-decoration:none;">
+                                <button class="admin-dashboard-button" style="font-size:10px; width:8em; height:3em;">
+                                    <span> News </span>
+                                </button>
+                            </a>
+
+                            <a href="{{ route('admin.team.index') }}" style="text-decoration:none;">
+                                <button class="admin-dashboard-button" style="font-size:10px; width:8em; height:3em;">
+                                    <span> Team </span>
+                                </button>
+                            </a>
+
+                            <a href="{{ route('admin.messages.index') }}" style="text-decoration:none;">
+                                <button class="admin-dashboard-button" style="font-size:10px; width:8em; height:3em;">
+                                    <span> Messages </span>
+                                </button>
+                            </a>
 
                             <div class="spinner-box">
                                 <div class="configure-border-1">  

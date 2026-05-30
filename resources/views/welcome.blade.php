@@ -36,8 +36,16 @@
                     <button class="homepage-button">Home</button>
                 </a>
 
-                <a class="nav-link" href="{{ route('gamespage') }}">
+                <a class="nav-link" href="{{ route('games.index') }}">
                     <button class="homepage-button">Games</button>
+                </a>
+
+                <a class="nav-link" href="{{ route('posts.index') }}">
+                    <button class="homepage-button">News</button>
+                </a>
+
+                <a class="nav-link" href="{{ route('forum.index') }}">
+                    <button class="homepage-button">Forum</button>
                 </a>
 
                 <a class="nav-link" href="{{ route('aboutpage') }}">

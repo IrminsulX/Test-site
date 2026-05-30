@@ -36,8 +36,16 @@
                         <button class="homepage-button">Home</button>
                     </a>
 
-                    <a class="nav-link" href="{{ route('gamespage') }}">
+                    <a class="nav-link" href="{{ route('games.index') }}">
                         <button class="homepage-button">Games</button>
+                    </a>
+
+                    <a class="nav-link" href="{{ route('posts.index') }}">
+                        <button class="homepage-button">News</button>
+                    </a>
+
+                    <a class="nav-link" href="{{ route('forum.index') }}">
+                        <button class="homepage-button">Forum</button>
                     </a>
 
                     <a class="nav-link" href="{{ route('aboutpage') }}">
@@ -68,9 +76,12 @@
                         </button>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <button class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="sign-out-button" href="{{ route('profile.show', Auth::user()) }}">
+                                {{ __('Profile') }}
+                            </a>
+                            <a class="sign-out-button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 {{ __('Sign out') }}
-                            </button>
+                            </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -122,7 +133,7 @@
 
             <div class="contact-form-wrapper">
                 <h3>Send Us a Message</h3>
-                <form action="/send-message" method="POST">
+                <form action="{{ route('contact.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="name">Name</label>
