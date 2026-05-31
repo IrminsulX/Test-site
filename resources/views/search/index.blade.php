@@ -136,10 +136,13 @@
                                 <div class="configure-border-1"><div class="configure-core"></div></div>
                                 <div class="configure-border-2"><div class="configure-core"></div></div>
                             </div>
-                            <div class="copyright">&copy; 2025 Irminsul Studio ツ
-                                <a href="{{ route('privacy') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Privacy</a>
-                                <a href="{{ route('terms') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Terms</a>
-                                <a href="{{ route('press-kit') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Press Kit</a></div>
+                            <div class="copyright">
+                                <a href="{{ route('privacy') }}" class="footer-link">Privacy</a>
+                                <span class="footer-sep">|</span>
+                                <a href="{{ route('terms') }}" class="footer-link">Terms</a>
+                                <span class="footer-sep">|</span>
+                                <a href="{{ route('press-kit') }}" class="footer-link">Press Kit</a>
+                                &copy; 2025 Irminsul Studio ツ</div>
                         </div>
                     </div>
                 </div>

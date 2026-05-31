@@ -742,6 +742,23 @@ body {
   
 .copyright::before {
     margin-left: auto;
+}
+
+.footer-link {
+    color: #888;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.15s, text-decoration 0.15s;
+}
+.footer-link:hover {
+    color: #db4f56;
+    text-decoration: underline;
+}
+.footer-sep {
+    color: #555;
+    margin: 0 10px;
+    font-size: 0.8rem;
+}
   }
   
 .copyright::after, .copyright::before {
