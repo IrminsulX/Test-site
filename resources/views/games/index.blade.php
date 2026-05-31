@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -151,81 +151,47 @@
 
     <!-- Footer's section -->
 
-    <nav class="footer">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                
-                <div class="navbar-collapse" id="navbarNav">
-
-                    <button class="social-media-buttons instagram">
-                        <a href="https://www.instagram.com" target="_blank">
-                            <img src="{{ asset('images/instagram-white-icon.png') }}" alt="Instagram">
-                        </a>
-                    </button>
-
-                    <button class="social-media-buttons youtube">
-                        <a href="https://www.youtube.com" target="_blank">
-                            <img src="{{ asset('images/youtube-app-white-icon.png') }}" alt="YouTube">
-                        </a>
-                    </button>
-
-                    <button class="social-media-buttons twitter">
-                        <a href="https://x.com/?mx=2" target="_blank">
-                            <img src="{{ asset('images/x-social-media-white-icon.png') }}" alt="twitter">
-                        </a>
-                    </button>
-
-                    <button class="social-media-buttons discord">
-                        <a href="https://discord.com/" target="_blank">
-                            <img src="{{ asset('images/discord-white-icon.png') }}" alt="twitter">
-                        </a>
-                    </button>
-
-                    <button class="social-media-buttons bluesky">
-                        <a href="https://bsky.app/" target="_blank">
-                            <img src="{{ asset('images/bluesky-icon.png') }}" alt="bluesky">
-                        </a>
-                    </button>
-
-                    <div class="ms-auto" id="navbarSupportedContent">
-                        <div class="navbar-container">
-
-                            @auth
-                                @if(auth()->user()->isAdmin())
-                                    <a href="{{ route('adminhomepages') }}">
-                                        <button class="admin-dashboard-button">
-                                            <span> Administrator Page </span>
-                                        </button>
-                                    </a>
-                                @endif
-                            @endauth
-
-                            <div class="spinner-box">
-                                <div class="configure-border-1">  
-                                    <div class="configure-core"></div>
-                                </div>  
-                                <div class="configure-border-2">
-                                    <div class="configure-core"></div>
-                                </div> 
-                            </div>
-
-                            <div class="copyright">
-                                <a href="{{ route('privacy') }}" class="footer-link">Privacy</a>
-                                <span class="footer-sep">|</span>
-                                <a href="{{ route('terms') }}" class="footer-link">Terms</a>
-                                <span class="footer-sep">|</span>
-                                <a href="{{ route('press-kit') }}" class="footer-link">Press Kit</a>
-                                &copy; 2025 Irminsul Studio ツ
-                            </div>
-
-                        </div>
-
-                    </div>
-                    
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-social">
+                <a href="https://www.instagram.com" target="_blank" class="social-btn instagram">
+                        <img src="{{ asset('images/instagram-white-icon.png') }}" alt="Instagram">
+                </a>
+                <a href="https://www.youtube.com" target="_blank" class="social-btn youtube">
+                        <img src="{{ asset('images/youtube-app-white-icon.png') }}" alt="YouTube">
+                </a>
+                <a href="https://x.com/?mx=2" target="_blank" class="social-btn twitter">
+                        <img src="{{ asset('images/x-social-media-white-icon.png') }}" alt="twitter">
+                </a>
+                <a href="https://discord.com/" target="_blank" class="social-btn discord">
+                        <img src="{{ asset('images/discord-white-icon.png') }}" alt="discord">
+                </a>
+                <a href="https://bsky.app/" target="_blank" class="social-btn bluesky">
+                        <img src="{{ asset('images/bluesky-icon.png') }}" alt="bluesky">
+                </a>
+            </div>
+            <div class="footer-center">
+                <div class="footer-links">
+                    <a href="{{ route('privacy') }}">Privacy</a>
+                    <span class="sep">·</span>
+                    <a href="{{ route('terms') }}">Terms</a>
+                    <span class="sep">·</span>
+                    <a href="{{ route('press-kit') }}">Press Kit</a>
+                </div>
+                <div class="footer-copyright">
+                    &copy; 2025 Irminsul Studio ツ
                 </div>
             </div>
-        </nav>
-    </nav>
+            <div class="footer-right">
+                @auth
+                    @if(auth()->user()->isAdmin())
+                        <a href="{{ route('adminhomepages') }}" class="footer-admin-btn">Admin</a>
+                    @endif
+                @endauth
+                <div class="footer-spinner"></div>
+            </div>
+        </div>
+    </footer>
     
 <script src="/js/homepage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
