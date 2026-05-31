@@ -57,20 +57,23 @@ class GameController extends Controller
             'is_published' => 'boolean',
         ]);
 
+        unset($data['featured_image']);
+
         if ($request->boolean('delete_featured_image') && $game->featured_image) {
             Storage::disk('public')->delete($game->featured_image);
-            $data['featured_image'] = null;
+            $game->featured_image = null;
         }
 
         if ($request->hasFile('featured_image')) {
             if ($game->featured_image) {
                 Storage::disk('public')->delete($game->featured_image);
             }
-            $data['featured_image'] = $request->file('featured_image')->store('games', 'public');
+            $game->featured_image = $request->file('featured_image')->store('games', 'public');
         }
 
         $data['is_published'] = $request->boolean('is_published');
         $game->update($data);
+        $game->save();
 
         return redirect()->route('admin.games.index')->with('success', 'Game updated!');
     }

@@ -172,11 +172,12 @@
 
                 <div class="admin-form-row">
                     <div class="admin-form-group">
-                        <label for="featured_image">New Featured Image</label>
-                        <div class="admin-file-wrap">
-                            <input type="file" name="featured_image" id="featured_image" accept=".png, .jpg, .gif, .bmp, .webp" onchange="this.nextElementSibling.textContent = this.files[0].name">
-                            <span class="admin-file-name">No file chosen</span>
-                        </div>
+                            <label for="featured_image">New Featured Image</label>
+                            <div class="admin-file-wrap">
+                                <input type="file" name="featured_image" id="featured_image" accept=".png, .jpg, .gif, .bmp, .webp" onchange="this.nextElementSibling.textContent = this.files[0].name">
+                                <span class="admin-file-name">No file chosen</span>
+                            </div>
+                            @error('featured_image') <div style="color: #db4f56; font-size: 0.85rem; margin-top: 5px;">{{ $message }}</div> @enderror
                     </div>
                 </div>
 
