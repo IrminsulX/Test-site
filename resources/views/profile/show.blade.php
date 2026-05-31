@@ -232,6 +232,8 @@
 
             <div class="profile-detail"><strong>Joined:</strong> {{ $user->created_at->format('F j, Y') }}</div>
 
+            <div class="profile-detail"><strong>Role:</strong> {{ ucfirst($user->role) }}</div>
+
             @if($user->twitter)
                 <div class="profile-detail">
                     <strong>Twitter:</strong>
