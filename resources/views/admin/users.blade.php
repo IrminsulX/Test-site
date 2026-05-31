@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <title>Irminsul Studio | Edit Game</title>
+    <title>Irminsul Studio | Users</title>
 
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/adminhomepage.css') }}">
@@ -87,7 +87,7 @@
     <div class="admin-heading-section">
         <div class="admin-heading">
             <span class="admin-star">&#9733;</span>
-            <h2>EDIT GAME</h2>
+            <h2>USERS</h2>
             <span class="admin-star">&#9733;</span>
         </div>
     </div>
@@ -112,87 +112,58 @@
     <div class="admin-section">
         <div class="admin-section-header">
             <span class="admin-section-star">&#9733;</span>
-            <h3>{{ $game->name }}</h3>
+            <h3>All Users</h3>
             <span class="admin-section-star">&#9733;</span>
         </div>
 
         <div class="admin-card">
-            <form action="{{ route('admin.games.update', $game->id) }}" method="POST" enctype="multipart/form-data" class="admin-upload-form">
-                @csrf
-                @method('PUT')
-
-                <div class="admin-form-row">
-                    <div class="admin-form-group">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" value="{{ old('name', $game->name) }}" required>
-                    </div>
-                </div>
-
-                <div class="admin-form-row">
-                    <div class="admin-form-group">
-                        <label for="description">Description</label>
-                        <textarea name="description" id="description" rows="6" required>{{ old('description', $game->description) }}</textarea>
-                    </div>
-                </div>
-
-                <div class="admin-form-row">
-                    <div class="admin-form-group">
-                        <label for="play_url">Play URL</label>
-                        <input type="url" name="play_url" id="play_url" value="{{ old('play_url', $game->play_url) }}" placeholder="https://...">
-                    </div>
-                </div>
-
-                <div class="admin-form-row">
-                    <div class="admin-form-group">
-                        <label for="status">Status</label>
-                        <select name="status" id="status" class="form-select" required>
-                            <option value="released" {{ old('status', $game->status) === 'released' ? 'selected' : '' }}>Released</option>
-                            <option value="beta" {{ old('status', $game->status) === 'beta' ? 'selected' : '' }}>Beta</option>
-                            <option value="coming_soon" {{ old('status', $game->status) === 'coming_soon' ? 'selected' : '' }}>Coming Soon</option>
-                        </select>
-                    </div>
-                </div>
-
-                @if($game->featured_image)
-                    <div class="admin-form-row">
-                        <div class="admin-form-group">
-                            <label>Current Featured Image</label>
-                            <div class="mb-2">
-                                <img src="{{ asset('storage/' . $game->featured_image) }}" alt="Featured" style="max-width: 200px;" class="img-thumbnail">
-                                <p class="mt-1 text-muted">{{ $game->featured_image }}</p>
-                            </div>
-                            <label class="text-warning">
-                                <input type="checkbox" name="delete_featured_image" value="1"> Delete featured image
-                            </label>
-                        </div>
-                    </div>
-                @endif
-
-                <div class="admin-form-row">
-                    <div class="admin-form-group">
-                        <label for="featured_image">New Featured Image</label>
-                        <div class="admin-file-wrap">
-                            <input type="file" name="featured_image" id="featured_image" accept=".png, .jpg, .gif, .bmp, .webp" onchange="this.nextElementSibling.textContent = this.files[0].name">
-                            <span class="admin-file-name">No file chosen</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="admin-form-row">
-                    <div class="admin-form-group">
-                        <label class="d-block">Published</label>
-                        <input type="checkbox" name="is_published" id="is_published" value="1" {{ old('is_published', $game->is_published) ? 'checked' : '' }}>
-                        <label for="is_published" class="ms-2">Published</label>
-                    </div>
-                </div>
-
-                <button type="submit" class="admin-upload-btn"><i class="fas fa-save"></i> Update Game</button>
-            </form>
+            <table class="table table-dark table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Current Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($users as $user)
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                <span class="badge" style="background: #db4f56; color: #fff; padding: 4px 12px; border-radius: 4px; text-transform: capitalize;">
+                                    {{ $user->role }}
+                                </span>
+                            </td>
+                            <td>
+                                @if(auth()->id() !== $user->id)
+                                    <form action="{{ route('admin.users.updateRole', $user->id) }}" method="POST" class="d-inline admin-actions">
+                                        @csrf
+                                        @method('PATCH')
+                                        <select name="role" class="form-select form-select-sm d-inline" style="width: auto; display: inline-block; background: #212121; color: #fff; border: 1px solid #444;">
+                                            <option value="user" @selected($user->role === 'user')>User</option>
+                                            <option value="editor" @selected($user->role === 'editor')>Editor</option>
+                                            <option value="moderator" @selected($user->role === 'moderator')>Moderator</option>
+                                            <option value="admin" @selected($user->role === 'admin')>Admin</option>
+                                        </select>
+                                        <button type="submit" class="admin-btn admin-btn-edit"><i class="fas fa-save"></i> Update</button>
+                                    </form>
+                                @else
+                                    <span style="color: #888; font-size: 0.9rem;">(you)</span>
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">No users found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
-
-        <a href="{{ route('admin.games.index') }}">
-            <button class="admin-btn admin-btn-edit mt-3"><i class="fas fa-arrow-left"></i> Back to Games</button>
-        </a>
     </div>
 
     <nav class="footer">

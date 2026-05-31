@@ -104,7 +104,7 @@
     <div class="container py-5">
         <div class="text-center mb-5">
             <span class="featured-star" style="color: #ffd700; font-size: 2rem;">&#9733;</span>
-            <h2 class="d-inline mx-3" style="color: #fff;">OUR GAMES</h2>
+            <h2 class="d-inline mx-3" style="color: #fff; font-weight: bold;">OUR GAMES</h2>
             <span class="featured-star" style="color: #ffd700; font-size: 2rem;">&#9733;</span>
         </div>
 
