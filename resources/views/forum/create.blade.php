@@ -185,6 +185,10 @@
                         <button class="homepage-button">Contact</button>
                     </a>
 
+                    <a class="nav-link" href="{{ route('search') }}">
+                        <button class="homepage-button" style="width: auto; padding: 10px 12px;"><i class="fas fa-search"></i></button>
+                    </a>
+
                     <div class="header-border"></div>
 
                     @guest
@@ -251,6 +255,19 @@
                         @endforeach
                     </select>
                     @error('game_id')
+                        <span style="color: #f08a92; font-size: 0.8rem; margin-top: 6px; display: block;">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="forum-create-form-group">
+                    <label for="category">Category <span style="color: #666; text-transform: none; letter-spacing: 0;">(optional)</span></label>
+                    <select id="category" name="category">
+                        <option value="">-- Select a Category --</option>
+                        @foreach($categories as $key => $label)
+                            <option value="{{ $key }}" {{ old('category') === $key ? 'selected' : '' }}>{{ $label }}</option>
+                        @endforeach
+                    </select>
+                    @error('category')
                         <span style="color: #f08a92; font-size: 0.8rem; margin-top: 6px; display: block;">{{ $message }}</span>
                     @enderror
                 </div>

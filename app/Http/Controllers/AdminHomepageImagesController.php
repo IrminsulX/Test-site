@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AdminHomepageImages;
 use Illuminate\Support\Facades\Storage;
+use App\Services\ImageService;
 
 class AdminHomepageImagesController extends Controller {
     
@@ -33,7 +34,7 @@ class AdminHomepageImagesController extends Controller {
             'type' => 'required|in:dashboard,featured',
         ]);
 
-        $imagePath = $request->file('fileUpload')->store('images', 'public');
+        $imagePath = ImageService::resizeAndStore($request->file('fileUpload'), 'images', 1200);
 
         AdminHomepageImages::create([
             'game_name' => trim($request->gameName),

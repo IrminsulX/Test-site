@@ -59,6 +59,10 @@
                         <button class="homepage-button">Contact</button>
                     </a>
 
+                    <a class="nav-link" href="{{ route('search') }}">
+                        <button class="homepage-button" style="width: auto; padding: 10px 12px;"><i class="fas fa-search"></i></button>
+                    </a>
+
                     <div class="header-border"></div>
 
                     @guest
@@ -125,6 +129,49 @@
                         <div class="post-content" style="color: #ccc; font-size: 1.05rem; line-height: 1.8;">
                             {!! nl2br(e($post->content)) !!}
                         </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4" style="background-color: #272930; border: 1px solid #333; border-radius: 12px; overflow: hidden;">
+                    <div class="card-body">
+                        <h4 style="color: #fff; margin-bottom: 20px;">
+                            <span style="color: #ffd700;">&#9733;</span> Comments ({{ $post->comments->count() }})
+                        </h4>
+
+                        @forelse($post->comments as $comment)
+                            <div style="padding: 15px 0; border-bottom: 1px solid #333;">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                    <strong style="color: #fff;">
+                                        <a href="{{ route('profile.show', $comment->user) }}" style="color: #db4f56; text-decoration: none;">{{ $comment->user->name }}</a>
+                                    </strong>
+                                    <span style="color: #777; font-size: 0.8rem;">{{ $comment->created_at->diffForHumans() }}</span>
+                                    @if(Auth::id() === $comment->user_id || (Auth::check() && Auth::user()->isAdmin()))
+                                        <form action="{{ route('comments.destroy', $comment) }}" method="POST" class="ms-auto" onsubmit="return confirm('Delete this comment?')">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" style="background: none; border: none; color: #f08a92; cursor: pointer; font-size: 0.8rem;"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                    @endif
+                                </div>
+                                <p style="color: #ccc; margin: 0; font-size: 0.95rem;">{{ $comment->body }}</p>
+                            </div>
+                        @empty
+                            <p style="color: #888; text-align: center; padding: 20px;">No comments yet. Be the first!</p>
+                        @endforelse
+
+                        @auth
+                            <form method="POST" action="{{ route('comments.store', $post) }}" class="mt-4">
+                                @csrf
+                                <textarea name="body" rows="3" placeholder="Write a comment..." required style="width: 100%; padding: 14px 16px; background: #212121; border: 1px solid #333; color: #fff; font-size: 1rem; outline: none; resize: vertical; font-family: inherit; box-sizing: border-box; border-radius: 0;" onfocus="this.style.borderColor='#db4f56'" onblur="this.style.borderColor='#333'"></textarea>
+                                @error('body')
+                                    <span style="color: #f08a92; font-size: 0.8rem;">{{ $message }}</span>
+                                @enderror
+                                <button type="submit" class="btn mt-2" style="background-color: #212121; color: #fff; border: 1px solid #fff; border-radius: 5px; padding: 10px 24px; box-shadow: 0px 4px 0px #d67c7c; font-weight: 600;">Post Comment</button>
+                            </form>
+                        @else
+                            <div class="mt-4 text-center" style="padding: 20px; color: #888;">
+                                Please <a href="{{ route('login') }}" style="color: #db4f56;">log in</a> to comment.
+                            </div>
+                        @endauth
                     </div>
                 </div>
 

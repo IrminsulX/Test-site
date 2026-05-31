@@ -5,6 +5,7 @@ body {
     background-size: cover;
     overflow-x: hidden;
     color: white;
+    padding-bottom: 80px;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------ */
@@ -697,74 +698,23 @@ body {
     left: 15px;
 }
 
-.next {
-    right: 15px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------------ */
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------------ */
-
-/* Groups Dashboard Section */
-
-.community-dashboard {
-    height: 70px;
-    width: 400px;
-    background: rgba(0, 0, 0, 0.966);
-    border-radius: 0px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 25px auto; 
-    display: flex; /* Enables flexbox */
-    align-items: center; /* Vertically aligns content */
-    justify-content: center; /* Centers content horizontally */
-}
-
-.community-dashboard h2 {
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    color: white;
-    border-radius: 5px;
-    text-shadow: 2px 1px 3px rgba(0, 0, 0, 0.8);
-    padding: 8px 20px;
-    margin: auto;
-    display: flex;
-    align-items: center; /* Align logo & text in one row */
-    gap: 10px; /* Adds space between logo and text */
-}
-
-.community-icon {
-    width: 40px; /* Adjust the size of the logo */
-    height: auto;
-}
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------------ */
-
 /* Footer Section */
 
 .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
     justify-content: space-between;
     align-items: center;
     padding: 5px;
     background-color: #272930;
     box-shadow: 4px 5px 17px 4px #db4f56;
+}
+
+body {
+    padding-bottom: 80px;
 }
 
 .footer p {

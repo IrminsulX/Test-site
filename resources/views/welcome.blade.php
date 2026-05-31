@@ -56,7 +56,11 @@
                     <button class="homepage-button">Contact</button>
                 </a>
 
-                <div class="header-border"></div>
+                    <a class="nav-link" href="{{ route('search') }}">
+                        <button class="homepage-button" style="width: auto; padding: 10px 12px;"><i class="fas fa-search"></i></button>
+                    </a>
+
+                    <div class="header-border"></div>
             
                 <a class="nav-link" href="{{ route('register') }}">
                     <button class="register-button">Sign up</button>

@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'bio',
+        'avatar',
+        'twitter',
+        'discord',
+        'role',
     ];
 
     /**
@@ -49,6 +54,26 @@ class User extends Authenticatable
     // app/Models/User.php
     public function isAdmin()
     {
-        return $this->is_admin;
+        return $this->is_admin || $this->role === 'admin';
+    }
+
+    public function isModerator()
+    {
+        return $this->role === 'moderator' || $this->isAdmin();
+    }
+
+    public function isEditor()
+    {
+        return $this->role === 'editor' || $this->isAdmin();
+    }
+
+    public function hasRole($role)
+    {
+        return $this->role === $role || $this->isAdmin();
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(PostComment::class);
     }
 }

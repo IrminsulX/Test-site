@@ -266,6 +266,10 @@
                         <button class="homepage-button">Contact</button>
                     </a>
 
+                    <a class="nav-link" href="{{ route('search') }}">
+                        <button class="homepage-button" style="width: auto; padding: 10px 12px;"><i class="fas fa-search"></i></button>
+                    </a>
+
                     <div class="header-border"></div>
 
                     @guest
@@ -312,6 +316,9 @@
             <div class="forum-thread-meta">
                 Posted by <a href="{{ route('profile.show', $thread->user) }}">{{ $thread->user->name }}</a>
                 &middot; {{ $thread->created_at->format('F j, Y') }}
+                @if($thread->category)
+                    &middot; <span style="background: #212121; border: 1px solid #444; border-radius: 3px; padding: 2px 8px; font-size: 0.8rem;">{{ ucfirst(str_replace('-', ' ', $thread->category)) }}</span>
+                @endif
             </div>
             <div class="forum-thread-body">{{ $thread->body }}</div>
         </div>

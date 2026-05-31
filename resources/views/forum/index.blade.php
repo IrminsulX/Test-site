@@ -230,6 +230,10 @@
                         <button class="homepage-button">Contact</button>
                     </a>
 
+                    <a class="nav-link" href="{{ route('search') }}">
+                        <button class="homepage-button" style="width: auto; padding: 10px 12px;"><i class="fas fa-search"></i></button>
+                    </a>
+
                     <div class="header-border"></div>
 
                     @guest
@@ -276,8 +280,21 @@
         </div>
 
         @auth
-            <div class="forum-toolbar">
+            <div class="forum-toolbar" style="justify-content: space-between; align-items: center; gap: 10px;">
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <a href="{{ route('forum.index') }}" class="btn" style="background: {{ !$category ? '#db4f56' : '#212121' }}; color: #fff; border: 1px solid #444; border-radius: 5px; padding: 8px 16px; font-size: 0.85rem; text-decoration: none;">All</a>
+                    @foreach($categories as $key => $label)
+                        <a href="{{ route('forum.index', ['category' => $key]) }}" class="btn" style="background: {{ $category === $key ? '#db4f56' : '#212121' }}; color: #fff; border: 1px solid #444; border-radius: 5px; padding: 8px 16px; font-size: 0.85rem; text-decoration: none;">{{ $label }}</a>
+                    @endforeach
+                </div>
                 <a href="{{ route('forum.create') }}" class="new-thread-button">+ New Thread</a>
+            </div>
+        @else
+            <div class="forum-toolbar" style="justify-content: center; gap: 8px; flex-wrap: wrap;">
+                <a href="{{ route('forum.index') }}" class="btn" style="background: {{ !$category ? '#db4f56' : '#212121' }}; color: #fff; border: 1px solid #444; border-radius: 5px; padding: 8px 16px; font-size: 0.85rem; text-decoration: none;">All</a>
+                @foreach($categories as $key => $label)
+                    <a href="{{ route('forum.index', ['category' => $key]) }}" class="btn" style="background: {{ $category === $key ? '#db4f56' : '#212121' }}; color: #fff; border: 1px solid #444; border-radius: 5px; padding: 8px 16px; font-size: 0.85rem; text-decoration: none;">{{ $label }}</a>
+                @endforeach
             </div>
         @endauth
 
@@ -285,8 +302,9 @@
             <table class="forum-table">
                 <thead>
                     <tr>
-                        <th style="width: 50%;">Thread</th>
-                        <th style="width: 15%;">Author</th>
+                        <th style="width: 40%;">Thread</th>
+                        <th style="width: 12%;">Category</th>
+                        <th style="width: 13%;">Author</th>
                         <th style="width: 10%;">Replies</th>
                         <th style="width: 25%;">Latest Reply</th>
                     </tr>
@@ -298,6 +316,13 @@
                                 <span class="forum-pin-icon">&#9733;</span>
                             @endif
                             <a href="{{ route('forum.show', $thread) }}" class="forum-thread-title">{{ $thread->title }}</a>
+                        </td>
+                        <td class="forum-meta">
+                            @if($thread->category)
+                                <span style="background: #212121; border: 1px solid #444; border-radius: 3px; padding: 3px 10px; font-size: 0.8rem;">{{ ucfirst(str_replace('-', ' ', $thread->category)) }}</span>
+                            @else
+                                <span style="color: #555;">-</span>
+                            @endif
                         </td>
                         <td class="forum-meta">
                             <a href="{{ route('profile.show', $thread->user) }}">{{ $thread->user->name }}</a>

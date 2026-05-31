@@ -9,7 +9,7 @@ class ForumThread extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['title', 'slug', 'body', 'user_id', 'game_id', 'is_pinned'];
+    protected $fillable = ['title', 'slug', 'body', 'user_id', 'game_id', 'category', 'is_pinned'];
 
     protected function casts(): array
     {
@@ -43,5 +43,10 @@ class ForumThread extends Model
     public function latestReply()
     {
         return $this->hasOne(ForumReply::class)->latestOfMany();
+    }
+
+    public function scopeCategory($query, $category)
+    {
+        return $query->where('category', $category);
     }
 }

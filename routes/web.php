@@ -9,6 +9,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\SearchController;
 
 Auth::routes();
 
@@ -38,12 +40,26 @@ Route::get('/forum/{thread}', [ForumController::class, 'show'])->name('forum.sho
 Route::post('/forum/{thread}/reply', [ForumController::class, 'reply'])->name('forum.reply')->middleware('auth');
 
 // Profiles
-Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
+Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 
 // Contact form submission
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store')->middleware('throttle:5,60');
+
+// Comments on blog posts
+Route::post('/news/{post}/comments', [CommentController::class, 'store'])->name('comments.store')->middleware('auth', 'throttle:10,60');
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy')->middleware('auth');
+
+// Search
+Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+// Sitemap
+Route::get('/sitemap.xml', function () {
+    $games = \App\Models\Game::published()->get();
+    $posts = \App\Models\Post::published()->get();
+    return response()->view('sitemap', compact('games', 'posts'))->header('Content-Type', 'application/xml');
+});
 
 // Admin routes
 Route::middleware('admin')->group(function () {

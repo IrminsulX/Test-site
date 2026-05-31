@@ -2,8 +2,10 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Game;
+use App\Models\GameImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Services\ImageService;
 
 class GameController extends Controller
 {
@@ -94,7 +96,7 @@ class GameController extends Controller
             'caption' => 'nullable|string|max:255',
         ]);
 
-        $data['image_path'] = $request->file('image')->store('games/gallery', 'public');
+        $data['image_path'] = ImageService::resizeAndStore($request->file('image'), 'games/gallery', 1200);
         $game->images()->create($data);
 
         return redirect()->route('admin.games.images', $game)->with('success', 'Image added!');

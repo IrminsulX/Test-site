@@ -8,14 +8,21 @@ use Illuminate\Support\Facades\Auth;
 
 class ForumController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $threads = ForumThread::with('user', 'latestReply.user')
-            ->withCount('replies')
-            ->latest('is_pinned')
-            ->latest()
-            ->paginate(20);
-        return view('forum.index', compact('threads'));
+        $query = ForumThread::with('user', 'latestReply.user')
+            ->withCount('replies');
+
+        $category = $request->get('category');
+        if ($category) {
+            $query->where('category', $category);
+        }
+
+        $threads = $query->latest('is_pinned')->latest()->paginate(20);
+
+        $categories = ['general' => 'General', 'support' => 'Support', 'suggestions' => 'Suggestions', 'off-topic' => 'Off-Topic'];
+
+        return view('forum.index', compact('threads', 'categories', 'category'));
     }
 
     public function show(ForumThread $thread)
@@ -27,7 +34,8 @@ class ForumController extends Controller
     public function create()
     {
         $games = Game::published()->get();
-        return view('forum.create', compact('games'));
+        $categories = ['general' => 'General', 'support' => 'Support', 'suggestions' => 'Suggestions', 'off-topic' => 'Off-Topic'];
+        return view('forum.create', compact('games', 'categories'));
     }
 
     public function store(Request $request)
@@ -36,6 +44,7 @@ class ForumController extends Controller
             'title' => 'required|string|max:255',
             'body' => 'required|string',
             'game_id' => 'nullable|exists:games,id',
+            'category' => 'nullable|string|in:general,support,suggestions,off-topic',
         ]);
 
         $data['user_id'] = Auth::id();
