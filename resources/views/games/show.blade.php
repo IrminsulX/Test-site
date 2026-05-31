@@ -143,10 +143,13 @@
                         <div class="row g-3">
                             @foreach($game->images as $image)
                                 <div class="col-md-4 col-sm-6">
-                                    <div style="background-color: #272930; border: 1px solid #333; border-radius: 8px; overflow: hidden;">
+                                    <div style="background-color: #272930; border: 1px solid #333; border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="openLightbox('{{ asset('storage/' . $image->image_path) }}')">
                                         <img src="{{ asset('storage/' . $image->image_path) }}"
-                                             alt="Gallery image"
+                                             alt="{{ $image->caption ?? 'Gallery image' }}"
                                              style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                                        @if($image->caption)
+                                            <div style="padding: 8px 12px; color: #aaa; font-size: 0.85rem;">{{ $image->caption }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             @endforeach
@@ -154,7 +157,15 @@
                     </div>
                 @endif
 
-                <div class="text-center mt-4">
+                <div class="d-flex gap-3 justify-content-center mt-4">
+                    @auth
+                        <form action="{{ route('library.toggle', $game->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn" style="background-color: {{ $game->is_favorited ? '#db4f56' : '#212121' }}; color: #fff; border: 1px solid #444; border-radius: 8px;">
+                                <i class="fas fa-{{ $game->is_favorited ? 'check' : 'plus' }} me-2"></i>{{ $game->is_favorited ? 'In Library' : 'Add to Library' }}
+                            </button>
+                        </form>
+                    @endauth
                     <a href="{{ route('games.index') }}" class="btn" style="background-color: #212121; color: #fff; border: 1px solid #444; border-radius: 8px;">
                         <i class="fas fa-arrow-left me-2"></i>Back to Games
                     </a>
@@ -162,6 +173,27 @@
             </div>
         </div>
     </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; cursor: pointer; display: none; align-items: center; justify-content: center;" onclick="closeLightbox(event)">
+        <img id="lightboxImage" src="" alt="Full size" style="max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 4px;">
+        <button style="position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer;" onclick="closeLightbox()">&times;</button>
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            const modal = document.getElementById('lightboxModal');
+            document.getElementById('lightboxImage').src = src;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox(e) {
+            if (e && e.target !== document.getElementById('lightboxImage')) {
+                document.getElementById('lightboxModal').style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        }
+    </script>
 
     <!-- Footer's section -->
 
@@ -225,6 +257,9 @@
 
                             <div class="copyright">
                                 © 2025 Irminsul Studio ツ
+                                <a href="{{ route('privacy') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Privacy</a>
+                                <a href="{{ route('terms') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Terms</a>
+                                <a href="{{ route('press-kit') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Press Kit</a>
                             </div>
 
                         </div>

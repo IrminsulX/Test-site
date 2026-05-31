@@ -34,6 +34,11 @@ class Game extends Model
         return $this->hasMany(ForumThread::class);
     }
 
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'game_user')->withTimestamps();
+    }
+
     public function scopePublished($query)
     {
         return $query->where('is_published', true);

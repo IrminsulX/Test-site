@@ -100,6 +100,8 @@
         <a href="{{ route('admin.team.index') }}"><button class="admin-nav-btn"><i class="fas fa-users"></i> Team</button></a>
         <a href="{{ route('admin.users') }}"><button class="admin-nav-btn"><i class="fas fa-user-cog"></i> Users</button></a>
         <a href="{{ route('admin.messages.index') }}"><button class="admin-nav-btn"><i class="fas fa-envelope"></i> Messages</button></a>
+        <a href="{{ route('admin.newsletter.index') }}"><button class="admin-nav-btn"><i class="fas fa-mail-bulk"></i> Newsletter</button></a>
+        <a href="{{ route('admin.logs') }}"><button class="admin-nav-btn"><i class="fas fa-history"></i> Activity</button></a>
         <a href="{{ route('adminhomepages') }}"><button class="admin-nav-btn"><i class="fas fa-tachometer-alt"></i> Dashboard</button></a>
     </div>
 
@@ -301,6 +303,9 @@
                             </div>
 
                             <div class="copyright">
+                                <a href="{{ route('privacy') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Privacy</a>
+                                <a href="{{ route('terms') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Terms</a>
+                                <a href="{{ route('press-kit') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Press Kit</a>
                                 &copy; 2025 Irminsul Studio ツ
                             </div>
 

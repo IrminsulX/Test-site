@@ -245,6 +245,9 @@
 
                             <div class="copyright">
                                 © 2025 Irminsul Studio ツ
+                                <a href="{{ route('privacy') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Privacy</a>
+                                <a href="{{ route('terms') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Terms</a>
+                                <a href="{{ route('press-kit') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Press Kit</a>
                             </div>
 
                         </div>

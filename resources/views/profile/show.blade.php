@@ -251,6 +251,32 @@
                 @endif
             @endauth
         </div>
+
+        @if($user->favoritedGames->count() > 0)
+        <div class="profile-card" style="margin-top: 30px;">
+            <div class="profile-heading">
+                <span class="profile-star">&#9733;</span>
+                <h2>GAME LIBRARY</h2>
+                <span class="profile-star">&#9733;</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; margin-top: 20px;">
+                @foreach($user->favoritedGames as $favGame)
+                    <a href="{{ route('games.show', $favGame->id) }}" style="text-decoration: none; text-align: center;">
+                        <div style="background: #212121; border-radius: 8px; padding: 15px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            @if($favGame->featured_image)
+                                <img src="{{ asset('storage/' . $favGame->featured_image) }}" alt="{{ $favGame->name }}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 4px;">
+                            @else
+                                <div style="width: 100%; height: 100px; background: #272930; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #555;">
+                                    <i class="fas fa-gamepad fa-2x"></i>
+                                </div>
+                            @endif
+                            <div style="color: #fff; margin-top: 8px; font-size: 0.85rem;">{{ $favGame->name }}</div>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+        @endif
     </div>
 
     <nav class="footer">
@@ -313,6 +339,9 @@
 
                             <div class="copyright">
                                 © 2025 Irminsul Studio ツ
+                                <a href="{{ route('privacy') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Privacy</a>
+                                <a href="{{ route('terms') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Terms</a>
+                                <a href="{{ route('press-kit') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Press Kit</a>
                             </div>
 
                         </div>

@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Game;
+use App\Models\Post;
+use App\Models\ActivityLog;
+use App\Models\NewsletterSubscriber;
+use App\Models\ContactMessage;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -12,7 +17,17 @@ class AdminController extends Controller
      */
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $gameCount = Game::count();
+        $postCount = Post::count();
+        $userCount = User::count();
+        $messageCount = ContactMessage::count();
+        $subscriberCount = NewsletterSubscriber::count();
+        $logCount = ActivityLog::count();
+
+        return view('admin.dashboard', compact(
+            'gameCount', 'postCount', 'userCount',
+            'messageCount', 'subscriberCount', 'logCount'
+        ));
     }
 
     /**

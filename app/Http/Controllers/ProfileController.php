@@ -9,6 +9,7 @@ class ProfileController extends Controller
 {
     public function show(User $user)
     {
+        $user->load('favoritedGames');
         return view('profile.show', compact('user'));
     }
 

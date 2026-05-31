@@ -15,6 +15,11 @@ class GameController extends Controller
     public function show(Game $game)
     {
         $game->load('images');
+        if (auth()->check()) {
+            $game->loadExists(['favoritedBy as is_favorited' => function ($q) {
+                $q->where('user_id', auth()->id());
+            }]);
+        }
         PageView::create([
             'page_type' => 'game',
             'page_id' => $game->id,

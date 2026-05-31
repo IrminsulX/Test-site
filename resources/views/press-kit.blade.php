@@ -1,31 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Irminsul Studio | Search: {{ $query }}</title>
-    <link rel="stylesheet" href="{{ asset('css/gamespage.css') }}">
+    <title>Irminsul Studio | Press Kit</title>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/aboutpage.css') }}">
     <style>
-        .search-section { padding: 40px 20px 60px; max-width: 1000px; margin: 0 auto; }
-        .search-heading { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 30px; }
-        .search-heading h2 { font-size: 1.8rem; font-weight: bold; color: #fff; letter-spacing: 2px; margin: 0; }
-        .search-star { font-size: 1.4rem; color: #ffd700; }
-        .search-result-card { background: #272930; padding: 20px 25px; margin-bottom: 15px; box-shadow: 0px 4px 8px rgba(0,0,0,0.3); }
-        .search-result-card h4 { margin: 0 0 6px; }
-        .search-result-card h4 a { color: #fff; text-decoration: none; }
-        .search-result-card h4 a:hover { color: #db4f56; }
-        .search-result-card p { color: #aaa; font-size: 0.9rem; margin: 0; }
-        .search-section-label { color: #ffd700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; display: block; }
-        .search-empty { text-align: center; padding: 60px 20px; color: #888; }
-        .search-empty-icon { font-size: 3rem; color: #ffd700; margin-bottom: 12px; }
-        .search-empty h3 { color: #fff; }
-        .search-empty p { color: #aaa; }
+        .press-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; }
+        .press-item { background: #272930; border-radius: 8px; overflow: hidden; text-align: center; padding: 20px; }
+        .press-item img { width: 100%; max-width: 180px; height: auto; border-radius: 4px; margin-bottom: 10px; }
+        .press-item .asset-name { color: #ccc; font-size: 0.9rem; }
+        .download-btn { display: inline-block; margin-top: 10px; padding: 8px 20px; background: #db4f56; color: #fff; border-radius: 4px; text-decoration: none; font-size: 0.85rem; }
+        .download-btn:hover { background: #c9444a; color: #fff; }
+        .press-section { margin-bottom: 40px; }
+        .press-section h3 { color: #ffd700; margin-bottom: 15px; }
     </style>
 </head>
 <body>
+
     <nav class="header">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar d-flex align-items-center" href="{{ route('home') }}">
@@ -63,57 +59,42 @@
         </nav>
     </nav>
 
-    <div class="search-section">
-        <div class="search-heading">
-            <span class="search-star">&#9733;</span>
-            <h2>SEARCH RESULTS</h2>
-            <span class="search-star">&#9733;</span>
+    <div class="about-section">
+        <div class="about-heading">
+            <span class="about-star">&#9733;</span>
+            <h2>PRESS KIT</h2>
+            <span class="about-star">&#9733;</span>
         </div>
+        <div class="main-dashboard">
+            <div class="about-container" style="flex-direction: column; max-width: 900px; margin: 0 auto;">
+                <div class="about-content" style="padding: 30px 0;">
+                    <h1>Irminsul Studio Press Kit</h1>
+                    <p class="about-lead">Resources for journalists, content creators, and partners.</p>
 
-        <form action="{{ route('search') }}" method="GET" class="mb-4">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" value="{{ $query }}" placeholder="Search games, news, forum..." style="background: #212121; border: 1px solid #333; color: #fff; padding: 14px 16px;">
-                <button type="submit" class="btn" style="background: #db4f56; color: #fff; border: none; padding: 14px 24px;"><i class="fas fa-search"></i></button>
+                    <div class="press-section">
+                        <h3>Studio Logo</h3>
+                        <div class="press-grid">
+                            <div class="press-item">
+                                <img src="{{ asset('images/StudioLogo.png') }}" alt="Studio Logo">
+                                <p class="asset-name">Studio Logo (PNG)</p>
+                                <a href="{{ asset('images/StudioLogo.png') }}" class="download-btn" download>Download</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="press-section">
+                        <h3>About Irminsul Studio</h3>
+                        <p>Irminsul Studio is committed to creating engaging, high-quality games that bring players together. We provide frequent updates, listen to player feedback, and foster a community-driven environment where gamers' voices shape the evolution of our games.</p>
+                        <p>Founded in 2025, Irminsul Studio has released multiple titles across various platforms, building a dedicated community of thousands of players worldwide.</p>
+                    </div>
+
+                    <div class="press-section">
+                        <h3>Contact</h3>
+                        <p>For press inquiries, interview requests, or collaboration opportunities, please <a href="{{ route('contact') }}" style="color: #db4f56;">contact us</a> or reach out on social media.</p>
+                    </div>
+                </div>
             </div>
-        </form>
-
-        @if($games->count())
-            <span class="search-section-label">&#9733; Games</span>
-            @foreach($games as $game)
-                <div class="search-result-card">
-                    <h4><a href="{{ route('games.show', $game) }}">{{ $game->name }}</a></h4>
-                    <p>{{ Str::limit($game->description, 150) }}</p>
-                </div>
-            @endforeach
-        @endif
-
-        @if($posts->count())
-            <span class="search-section-label">&#9733; News</span>
-            @foreach($posts as $post)
-                <div class="search-result-card">
-                    <h4><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></h4>
-                    <p>{{ Str::limit($post->excerpt, 150) }}</p>
-                </div>
-            @endforeach
-        @endif
-
-        @if($threads->count())
-            <span class="search-section-label">&#9733; Forum</span>
-            @foreach($threads as $thread)
-                <div class="search-result-card">
-                    <h4><a href="{{ route('forum.show', $thread) }}">{{ $thread->title }}</a></h4>
-                    <p>{{ Str::limit($thread->body, 150) }}</p>
-                </div>
-            @endforeach
-        @endif
-
-        @if(!$games->count() && !$posts->count() && !$threads->count())
-            <div class="search-empty">
-                <div class="search-empty-icon">&#128269;</div>
-                <h3>No results found</h3>
-                <p>Try a different search term.</p>
-            </div>
-        @endif
+        </div>
     </div>
 
     <nav class="footer">
@@ -123,23 +104,17 @@
                     <button class="social-media-buttons instagram"><a href="https://www.instagram.com" target="_blank"><img src="{{ asset('images/instagram-white-icon.png') }}" alt="Instagram"></a></button>
                     <button class="social-media-buttons youtube"><a href="https://www.youtube.com" target="_blank"><img src="{{ asset('images/youtube-app-white-icon.png') }}" alt="YouTube"></a></button>
                     <button class="social-media-buttons twitter"><a href="https://x.com/?mx=2" target="_blank"><img src="{{ asset('images/x-social-media-white-icon.png') }}" alt="twitter"></a></button>
-                    <button class="social-media-buttons discord"><a href="https://discord.com/" target="_blank"><img src="{{ asset('images/discord-white-icon.png') }}" alt="twitter"></a></button>
+                    <button class="social-media-buttons discord"><a href="https://discord.com/" target="_blank"><img src="{{ asset('images/discord-white-icon.png') }}" alt="discord"></a></button>
                     <button class="social-media-buttons bluesky"><a href="https://bsky.app/" target="_blank"><img src="{{ asset('images/bluesky-icon.png') }}" alt="bluesky"></a></button>
                     <div class="ms-auto" id="navbarSupportedContent">
                         <div class="navbar-container">
-                            @auth
-                                @if(auth()->user()->isAdmin())
-                                    <a href="{{ route('adminhomepages') }}"><button class="admin-dashboard-button"><span> Administrator Page </span></button></a>
-                                @endif
-                            @endauth
                             <div class="spinner-box">
                                 <div class="configure-border-1"><div class="configure-core"></div></div>
                                 <div class="configure-border-2"><div class="configure-core"></div></div>
                             </div>
-                            <div class="copyright">&copy; 2025 Irminsul Studio ツ
-                                <a href="{{ route('privacy') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Privacy</a>
-                                <a href="{{ route('terms') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Terms</a>
-                                <a href="{{ route('press-kit') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Press Kit</a></div>
+                            <div class="copyright">
+                                &copy; 2025 Irminsul Studio ツ
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -147,6 +122,7 @@
         </nav>
     </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -76,4 +76,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(PostComment::class);
     }
+
+    public function favoritedGames()
+    {
+        return $this->belongsToMany(Game::class, 'game_user')->withTimestamps();
+    }
 }

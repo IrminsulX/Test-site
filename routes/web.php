@@ -12,6 +12,11 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SearchController;
 
+use App\Http\Controllers\LibraryController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\Admin\ActivityLogController;
+use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
+
 Auth::routes();
 
 // Public pages
@@ -54,6 +59,18 @@ Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->nam
 // Search
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 
+// Newsletter subscription
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+Route::post('/newsletter/unsubscribe', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
+
+// Game library (favorites)
+Route::post('/games/{game}/library', [LibraryController::class, 'toggle'])->name('library.toggle')->middleware('auth');
+
+// Legal & Press Kit
+Route::view('/privacy', 'privacy')->name('privacy');
+Route::view('/terms', 'terms')->name('terms');
+Route::view('/press-kit', 'press-kit')->name('press-kit');
+
 // Sitemap
 Route::get('/sitemap.xml', function () {
     $games = \App\Models\Game::published()->get();
@@ -62,7 +79,7 @@ Route::get('/sitemap.xml', function () {
 });
 
 // Admin routes
-Route::middleware('admin')->group(function () {
+Route::middleware(['admin', \App\Http\Middleware\LogAdminActivity::class])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
     Route::patch('/admin/users/{user}/role', [AdminController::class, 'updateRole'])->name('admin.users.updateRole');
@@ -93,6 +110,14 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/team/{teamMember}/edit', [\App\Http\Controllers\Admin\TeamMemberController::class, 'edit'])->name('admin.team.edit');
     Route::put('/admin/team/{teamMember}', [\App\Http\Controllers\Admin\TeamMemberController::class, 'update'])->name('admin.team.update');
     Route::delete('/admin/team/{teamMember}', [\App\Http\Controllers\Admin\TeamMemberController::class, 'destroy'])->name('admin.team.destroy');
+
+    // Activity log
+    Route::get('/admin/logs', [ActivityLogController::class, 'index'])->name('admin.logs');
+
+    // Newsletter management
+    Route::get('/admin/newsletter', [AdminNewsletterController::class, 'index'])->name('admin.newsletter.index');
+    Route::get('/admin/newsletter/broadcast', [AdminNewsletterController::class, 'broadcastForm'])->name('admin.newsletter.broadcast');
+    Route::post('/admin/newsletter/broadcast', [AdminNewsletterController::class, 'broadcast'])->name('admin.newsletter.broadcast.send');
 
     // Contact messages
     Route::get('/admin/messages', [\App\Http\Controllers\Admin\MessageController::class, 'index'])->name('admin.messages.index');

@@ -218,7 +218,20 @@
         </div>
     </section>
 
-    
+    <section style="padding: 40px 20px; text-align: center; max-width: 600px; margin: 0 auto;">
+        <div style="background: #272930; padding: 30px; border-radius: 8px;">
+            <h3 style="color: #ffd700; margin-bottom: 10px;">&#9733; STAY UPDATED &#9733;</h3>
+            <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">Subscribe to our newsletter for game updates and news.</p>
+            <form action="{{ route('newsletter.subscribe') }}" method="POST" style="display: flex; gap: 10px; max-width: 450px; margin: 0 auto;">
+                @csrf
+                <input type="email" name="email" placeholder="Your email address" required style="flex: 1; padding: 12px 16px; background: #212121; color: #fff; border: 1px solid #444; border-radius: 4px;">
+                <button type="submit" style="padding: 12px 24px; background: #db4f56; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Subscribe</button>
+            </form>
+            @if(session('success'))
+                <div style="color: #4caf50; margin-top: 15px; font-size: 0.9rem;">{{ session('success') }}</div>
+            @endif
+        </div>
+    </section>
 
     <!-- Footer's section -->
 
@@ -281,6 +294,9 @@
                             </div>
 
                             <div class="copyright">
+                                <a href="{{ route('privacy') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Privacy</a>
+                                <a href="{{ route('terms') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Terms</a>
+                                <a href="{{ route('press-kit') }}" style="color: #888; text-decoration: none; margin-right: 15px; font-size: 0.8rem;">Press Kit</a>
                                 © 2025 Irminsul Studio ツ
                             </div>
 
