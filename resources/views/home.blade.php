@@ -9,7 +9,7 @@
     
     <title>Irminsul Studio | Home</title>
 
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <script src="/js/homepage.js"></script>
     
 </head>

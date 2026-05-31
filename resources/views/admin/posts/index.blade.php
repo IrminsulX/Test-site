@@ -88,6 +88,14 @@
         </div>
     </div>
 
+    <div class="admin-nav-row">
+        <a href="{{ route('admin.games.index') }}"><button class="admin-nav-btn"><i class="fas fa-gamepad"></i> Games</button></a>
+        <a href="{{ route('admin.posts.index') }}"><button class="admin-nav-btn"><i class="fas fa-newspaper"></i> News</button></a>
+        <a href="{{ route('admin.team.index') }}"><button class="admin-nav-btn"><i class="fas fa-users"></i> Team</button></a>
+        <a href="{{ route('admin.messages.index') }}"><button class="admin-nav-btn"><i class="fas fa-envelope"></i> Messages</button></a>
+        <a href="{{ route('adminhomepages') }}"><button class="admin-nav-btn"><i class="fas fa-tachometer-alt"></i> Dashboard</button></a>
+    </div>
+
     @if(session('success'))
         <div class="admin-alert admin-alert-success">{{ session('success') }}</div>
     @endif
@@ -124,7 +132,7 @@
                     @forelse ($posts as $post)
                         <tr>
                             <td>{{ $post->title }}</td>
-                            <td>{{ $post->author }}</td>
+                            <td>{{ $post->author->name ?? 'Unknown' }}</td>
                             <td>
                                 @if($post->is_published)
                                     <span class="badge bg-success">Published</span>
@@ -134,14 +142,16 @@
                             </td>
                             <td>{{ $post->created_at->format('Y-m-d') }}</td>
                             <td>
-                                <a href="{{ route('admin.posts.edit', $post->id) }}">
-                                    <button class="admin-btn admin-btn-edit"><i class="fas fa-edit"></i> Edit</button>
-                                </a>
-                                <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this post?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="admin-btn admin-btn-delete"><i class="fas fa-trash"></i> Delete</button>
-                                </form>
+                                <div class="admin-actions">
+                                    <a href="{{ route('admin.posts.edit', $post->id) }}">
+                                        <button class="admin-btn admin-btn-edit"><i class="fas fa-edit"></i> Edit</button>
+                                    </a>
+                                    <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this post?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="admin-btn admin-btn-delete"><i class="fas fa-trash"></i> Delete</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty

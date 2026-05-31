@@ -9,8 +9,8 @@
     
     <title>Irminsul Studio | Our Games</title>
 
-    <link rel="stylesheet" href="css/gamespage.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="{{ asset('css/gamespage.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     
 </head>
 

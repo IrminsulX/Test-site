@@ -424,6 +424,57 @@
     vertical-align: middle;
 }
 
+/* Admin Navigation Row */
+.admin-nav-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 20px 20px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-nav-btn {
+    color: #ecf0f1;
+    font-size: 14px;
+    background-color: #212121;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    padding: 8px 12px;
+    box-shadow: 0px 4px 0px #d67c7c;
+    transition: all 50ms;
+    width: 105px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.admin-nav-btn:active {
+    box-shadow: 0px 1px 0px #d67c7c;
+    position: relative;
+    top: 3px;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.admin-card td .admin-btn {
+    width: auto;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .admin-form-row {
@@ -451,5 +502,16 @@
 
     .admin-heading h2 {
         font-size: 1.5rem;
+    }
+
+    .admin-nav-row {
+        gap: 8px;
+        padding: 15px 15px 0;
+    }
+
+    .admin-nav-btn {
+        font-size: 12px;
+        padding: 6px 10px;
+        width: 90px;
     }
 }

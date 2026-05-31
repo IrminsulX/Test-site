@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Irminsul Studio | Welcome</title>
 
-    <link rel="stylesheet" href="css/main.css">
-    <script src="\js\homepage.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <script src="/js/homepage.js"></script>
 </head>
 
 <body>

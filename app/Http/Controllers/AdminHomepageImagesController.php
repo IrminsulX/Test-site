@@ -10,7 +10,7 @@ class AdminHomepageImagesController extends Controller {
     
     public function index() {
         $images = AdminHomepageImages::where('type', 'featured')->get();
-        return view('adminhomepage', compact('images'));
+        return view('adminhomepages', compact('images'));
     }    
 
     // Fetch dashboard images

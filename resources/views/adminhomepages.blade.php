@@ -9,8 +9,8 @@
     
     <title>Irminsul Studio | Administrator</title>
 
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/adminhomepage.css">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/adminhomepage.css') }}">
     <script src="/js/homepage.js"></script>
     
 </head>
@@ -87,6 +87,15 @@
             <h2>ADMIN DASHBOARD</h2>
             <span class="admin-star">&#9733;</span>
         </div>
+    </div>
+
+    <!-- Admin Navigation -->
+    <div class="admin-nav-row">
+        <a href="{{ route('admin.games.index') }}"><button class="admin-nav-btn"><i class="fas fa-gamepad"></i> Games</button></a>
+        <a href="{{ route('admin.posts.index') }}"><button class="admin-nav-btn"><i class="fas fa-newspaper"></i> News</button></a>
+        <a href="{{ route('admin.team.index') }}"><button class="admin-nav-btn"><i class="fas fa-users"></i> Team</button></a>
+        <a href="{{ route('admin.messages.index') }}"><button class="admin-nav-btn"><i class="fas fa-envelope"></i> Messages</button></a>
+        <a href="{{ route('adminhomepages') }}"><button class="admin-nav-btn"><i class="fas fa-tachometer-alt"></i> Dashboard</button></a>
     </div>
 
     <!-- Dashboard Images Section -->
@@ -276,30 +285,6 @@
 
                     <div class="ms-auto" id="navbarSupportedContent">
                         <div class="navbar-container">
-
-                            <a href="{{ route('admin.games.index') }}" style="text-decoration:none;">
-                                <button class="admin-dashboard-button admin-nav-button">
-                                    <span> Games </span>
-                                </button>
-                            </a>
-
-                            <a href="{{ route('admin.posts.index') }}" style="text-decoration:none;">
-                                <button class="admin-dashboard-button admin-nav-button">
-                                    <span> News </span>
-                                </button>
-                            </a>
-
-                            <a href="{{ route('admin.team.index') }}" style="text-decoration:none;">
-                                <button class="admin-dashboard-button admin-nav-button">
-                                    <span> Team </span>
-                                </button>
-                            </a>
-
-                            <a href="{{ route('admin.messages.index') }}" style="text-decoration:none;">
-                                <button class="admin-dashboard-button admin-nav-button">
-                                    <span> Messages </span>
-                                </button>
-                            </a>
 
                             <div class="spinner-box">
                                 <div class="configure-border-1">  

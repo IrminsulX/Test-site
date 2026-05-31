@@ -9,7 +9,8 @@
     
     <title>Irminsul Studio | About us</title>
 
-    <link rel="stylesheet" href="css/aboutpage.css">
+    <link rel="stylesheet" href="{{ asset('css/aboutpage.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     
 </head>
 
@@ -269,20 +270,7 @@
                     </div>
                     
                 </div>
-                                <div class="configure-border-2">
-                                    <div class="configure-core"></div>
-                                </div> 
-                            </div>
 
-                            <div class="copyright">
-                                © 2025 Irminsul Studio ツ
-                            </div>
-
-                        </div> <!-- Closed the div -->
-
-                    </div>
-                    
-                </div>
             </div>
         </nav>
     </nav>

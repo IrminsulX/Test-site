@@ -9,8 +9,8 @@
     
     <title>Irminsul Studio | News & Updates</title>
 
-    <link rel="stylesheet" href="css/contact.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     
 </head>
 
@@ -126,7 +126,7 @@
                                 </small>
                                 @if($post->author)
                                     <small style="color: #777;">
-                                        <i class="far fa-user me-1"></i>{{ $post->author }}
+                                        <i class="far fa-user me-1"></i>{{ $post->author->name ?? 'Unknown' }}
                                     </small>
                                 @endif
                             </div>

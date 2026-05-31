@@ -9,8 +9,8 @@
     
     <title>Irminsul Studio | {{ $post->title }}</title>
 
-    <link rel="stylesheet" href="css/contact.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     
 </head>
 
@@ -117,7 +117,7 @@
 
                         <div class="d-flex justify-content-between align-items-center mb-4" style="color: #777;">
                             @if($post->author)
-                                <small><i class="far fa-user me-1"></i>{{ $post->author }}</small>
+                                <small><i class="far fa-user me-1"></i>{{ $post->author->name ?? 'Unknown' }}</small>
                             @endif
                             <small><i class="far fa-calendar-alt me-1"></i>{{ $post->published_at->format('M d, Y') }}</small>
                         </div>
