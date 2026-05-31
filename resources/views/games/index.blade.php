@@ -130,7 +130,7 @@
                             </div>
 
                             <p class="card-text flex-grow-1" style="color: #aaa;">
-                                {{ Str::limit($game->short_description, 120) }}
+                                {{ Str::limit($game->description, 120) }}
                             </p>
 
                             <a href="{{ route('games.show', $game) }}" class="btn w-100" style="background-color: #212121; color: #fff; border: 1px solid #444; border-radius: 8px;">

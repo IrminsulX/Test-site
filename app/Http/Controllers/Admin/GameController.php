@@ -57,6 +57,11 @@ class GameController extends Controller
             'is_published' => 'boolean',
         ]);
 
+        if ($request->boolean('delete_featured_image') && $game->featured_image) {
+            Storage::disk('public')->delete($game->featured_image);
+            $data['featured_image'] = null;
+        }
+
         if ($request->hasFile('featured_image')) {
             if ($game->featured_image) {
                 Storage::disk('public')->delete($game->featured_image);
