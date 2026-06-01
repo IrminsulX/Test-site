@@ -12,11 +12,10 @@ body {
 /* Header Section */
 
 .header {
-    /* justify-content: space-between;
-    align-items: left; */
     padding: 0px;
     background-color: #272930;
     box-shadow: 4px 5px 17px 4px #db4f56;
+    margin-bottom: 50px;
 }
 
 .header a {
@@ -851,6 +850,14 @@ body {
 }
 
 @media (max-width: 768px) {
+    .homepage-button,
+    .register-button,
+    .log-out-button {
+        width: auto;
+        padding: 6px 12px;
+        font-size: 13px;
+        min-width: 60px;
+    }
     .footer {
         padding: 8px 14px;
     }
@@ -905,36 +912,14 @@ body {
     body {
         padding-bottom: 85px;
     }
+    .homepage-button,
+    .register-button,
+    .log-out-button {
+        padding: 5px 8px;
+        font-size: 11px;
+        min-width: 50px;
+    }
 }
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------------ */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -1150,7 +1135,6 @@ body {
     }
 
 }
-
 
 @media (max-width: 480px) {
     .hero-gallery {

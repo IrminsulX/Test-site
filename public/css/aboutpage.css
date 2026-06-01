@@ -8,15 +8,7 @@ body {
 }
 
 
-/* Header Section */
 
-.header {
-    /* justify-content: space-between;
-    align-items: left; */
-    padding: 0px;
-    background-color: #272930;
-    box-shadow: 4px 5px 17px 4px #db4f56;
-}
 
 .logo-icon {
   width: 40px; /* Adjust the size of the logo */
@@ -24,12 +16,7 @@ body {
 }
 
 
-.header a {
-    /* color: rgb(255, 255, 255);  */
-    text-decoration: none;
-    margin: 0 8px;
-    font-weight: bold;
-}
+
 
 /* Irminsul Studio Buttons */ 
 
@@ -73,133 +60,12 @@ body {
     transition-property: width, left;
 }
 
-/* Header-Pages button */ 
-
-.homepage-button {
-    color: #ecf0f1;
-    font-size: 17px;
-    background-color: #212121;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0px 6px 0px #d67c7c;
-    transition: all 50ms;
-    width: 120px;
-}
-   
-.homepage-button:active {
-    box-shadow: 0px 2px 0px #d67c7c ;
-    position: relative;
-    top: 2px;
-}
-
-/* Sign up & Log in button */
-
-.register-button {
-    color: #ecf0f1;
-    font-size: 17px;
-    background-color: #212121;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0px 6px 0px #787878;
-    transition: all 50ms;
-    width: 120px;
-}
-   
-.register-button:active {
-    box-shadow: 0px 2px 0px #787878;
-    position: relative;
-    top: 2px;
-}
 
 
-/* Log out button */
 
-.log-out-button {
-    color: #ecf0f1 !important;
-    font-size: 17px;
-    background-color: #212121;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0px 6px 0px #787878;
-    transition: all 50ms;
-    width: 120px;
-    height: 50px;
-    margin: auto 20px;
-    text-align: center;
-}
 
-.log-out-button:active {
-    box-shadow: 0px 2px 0px #787878;
-    position: relative;
-    top: 2px;
-}
 
-/* Prevent text color from changing */
-.log-out-button:hover,
-.log-out-button:focus {
-    color: #ecf0f1 !important;
-    background-color: #212121;
-}
 
-/* Dropdown Menu */
-.dropdown-menu {
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 20px !important;
-    margin: 0 !important;
-}
-
-/* Sign Out Button Styling */
-.dropdown-menu a.sign-out-button {
-    color: #ecf0f1 !important;
-    font-size: 17px;
-    background-color: #212121;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0px 6px 0px #787878;
-    transition: all 50ms;
-    width: 120px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5px;
-    text-decoration: none;
-}
-
-.dropdown-menu a.sign-out-button:hover {
-    background-color: #2a2a2a;
-}
-
-/* Sign Out Button (Styled Like Register Button) */
-.sign-out-button {
-    color: #ecf0f1; /* Light text */
-    font-size: 17px;
-    background-color: #212121;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0px 6px 0px #787878;
-    transition: all 50ms;
-    width: 120px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5px; /* Spacing from dropdown */
-}
-
-/* Active (Click) Effect */
-.sign-out-button:active {
-    box-shadow: 0px 2px 0px #787878;
-    position: relative;
-    top: 2px;
-}
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------ */
 
@@ -280,6 +146,20 @@ body {
     line-height: 1.8;
     margin-bottom: 0;
     font-size: 0.95rem;
+}
+
+/* About Image */
+.about-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-image img {
+    max-width: 100%;
+    height: auto;
+    width: 250px;
 }
 
 .about-content .about-lead {
@@ -633,21 +513,16 @@ body {
 
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255,255,255,0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-    width: 1.5em;`n    height: 1.5em;
+    width: 1.5em;
+    height: 1.5em;
     display: inline-block;
     vertical-align: middle;
 }
 
+
+
 /* Responsive */
 @media (max-width: 768px) {
-    .homepage-button,
-    .register-button,
-    .log-out-button {
-        width: auto;
-        padding: 6px 12px;
-        font-size: 13px;
-        min-width: 60px;
-    }
 
     .about-container {
         flex-direction: column;
@@ -697,12 +572,6 @@ body {
 }
 
 @media (max-width: 480px) {
-    .homepage-button,
-    .register-button {
-        padding: 5px 8px;
-        font-size: 11px;
-        min-width: 50px;
-    }
 
     .stat-card {
         min-width: 100px;

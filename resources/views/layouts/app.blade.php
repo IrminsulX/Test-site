@@ -13,7 +13,7 @@
 <body>
     <nav class="header">
         <nav class="navbar navbar-expand-lg">
-            <a class="navbar d-flex align-items-center" href="{{ url('/') }}">
+            <a class="navbar d-flex align-items-center" href="{{ route('home') }}">
                 <img src="{{ asset('images/StudioLogo.png') }}" alt="Studio Logo" class="logo-icon">
                 <button class="studio-button">Irminsul Studio ツ</button>
             </a>
@@ -43,29 +43,31 @@
                     <a class="nav-link" href="{{ route('contact') }}">
                         <button class="homepage-button">Contact</button>
                     </a>
+                    <a class="nav-link" href="{{ route('search') }}">
+                        <button class="homepage-button" style="width: auto; padding: 10px 12px;"><i class="fas fa-search"></i></button>
+                    </a>
 
                     <div class="header-border"></div>
 
                     @guest
                         @if (Route::has('login'))
+                            <a class="nav-link" href="{{ route('register') }}">
+                                <button class="register-button">Sign up</button>
+                            </a>
+                            
                             <a class="nav-link" href="{{ route('login') }}">
                                 <button class="register-button">Log in</button>
                             </a>
                         @endif
-                        @if (Route::has('register'))
-                            <a class="nav-link" href="{{ route('register') }}">
-                                <button class="register-button">Sign up</button>
-                            </a>
-                        @endif
                     @else
-                        <button class="auth-user-name nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <button class="log-out-button nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </button>
-                        <div class="dropdown-menu dropdown-menu-end auth-dropdown" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item auth-dropdown-item" href="{{ route('profile.show', Auth::user()) }}">
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="sign-out-button" href="{{ route('profile.show', Auth::user()) }}">
                                 {{ __('Profile') }}
                             </a>
-                            <a class="dropdown-item auth-dropdown-item" href="{{ route('logout') }}"
+                            <a class="sign-out-button" href="{{ route('logout') }}"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 {{ __('Sign out') }}
                             </a>
