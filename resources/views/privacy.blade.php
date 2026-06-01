@@ -57,27 +57,39 @@
         </div>
         <div class="main-dashboard">
             <div class="about-container" style="flex-direction: column; max-width: 800px; margin: 0 auto;">
-                <div class="about-content" style="padding: 30px 0;">
+                <div class="about-content" style="padding: 40px;">
                     <h1>Privacy Policy</h1>
                     <p class="about-lead">Last updated: May 2026</p>
 
-                    <h3>Information We Collect</h3>
-                    <p>We collect information you provide directly to us, including your name, email address, and any content you submit when contacting us or registering on our platform.</p>
+                    <div class="content-section">
+                        <h3>Information We Collect</h3>
+                        <p>We collect information you provide directly to us, including your name, email address, and any content you submit when contacting us or registering on our platform.</p>
+                    </div>
 
-                    <h3>How We Use Your Information</h3>
-                    <p>We use your information to provide and improve our services, communicate with you about updates and news, and respond to your inquiries.</p>
+                    <div class="content-section">
+                        <h3>How We Use Your Information</h3>
+                        <p>We use your information to provide and improve our services, communicate with you about updates and news, and respond to your inquiries.</p>
+                    </div>
 
-                    <h3>Data Protection</h3>
-                    <p>We implement appropriate security measures to protect your personal information from unauthorized access, alteration, or disclosure.</p>
+                    <div class="content-section">
+                        <h3>Data Protection</h3>
+                        <p>We implement appropriate security measures to protect your personal information from unauthorized access, alteration, or disclosure.</p>
+                    </div>
 
-                    <h3>Third-Party Services</h3>
-                    <p>We do not share your personal data with third parties except as necessary to operate our services or as required by law.</p>
+                    <div class="content-section">
+                        <h3>Third-Party Services</h3>
+                        <p>We do not share your personal data with third parties except as necessary to operate our services or as required by law.</p>
+                    </div>
 
-                    <h3>Cookies</h3>
-                    <p>Our site may use cookies to enhance your browsing experience. You can control cookie settings through your browser.</p>
+                    <div class="content-section">
+                        <h3>Cookies</h3>
+                        <p>Our site may use cookies to enhance your browsing experience. You can control cookie settings through your browser.</p>
+                    </div>
 
-                    <h3>Contact</h3>
-                    <p>If you have questions about this policy, please <a href="{{ route('contact') }}" style="color: #db4f56;">contact us</a>.</p>
+                    <div class="content-section">
+                        <h3>Contact</h3>
+                        <p>If you have questions about this policy, please <a href="{{ route('contact') }}">contact us</a>.</p>
+                    </div>
                 </div>
             </div>
         </div>

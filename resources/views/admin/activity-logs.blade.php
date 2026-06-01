@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -72,7 +72,7 @@
 
     <div class="admin-section">
         <div class="admin-card">
-            <table class="table table-dark table-striped table-hover">
+            <div class="table-responsive"><table class="table table-dark table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Time</th>
@@ -95,7 +95,7 @@
                         <tr><td colspan="5" class="text-center">No activity logged yet.</td></tr>
                     @endforelse
                 </tbody>
-            </table>
+            </table></div>
         </div>
         <div class="admin-pagination">{{ $logs->links() }}</div>
     </div>

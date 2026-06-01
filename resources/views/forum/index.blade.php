@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -299,7 +299,7 @@
         @endauth
 
         @forelse($threads as $thread)
-            <table class="forum-table">
+            <div class="table-responsive"><table class="forum-table">
                 <thead>
                     <tr>
                         <th style="width: 40%;">Thread</th>
@@ -338,7 +338,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table></div>
         @empty
             <div class="forum-empty">
                 <div class="forum-empty-icon">&#9993;</div>

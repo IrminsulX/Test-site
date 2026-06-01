@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -125,7 +125,7 @@
         </div>
 
         <div class="admin-card">
-            <table class="table table-dark table-striped table-hover">
+            <div class="table-responsive"><table class="table table-dark table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -176,7 +176,7 @@
                         </tr>
                     @endforelse
                 </tbody>
-            </table>
+            </table></div>
         </div>
 
         <div class="admin-pagination">

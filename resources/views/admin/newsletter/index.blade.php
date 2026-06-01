@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -81,7 +81,7 @@
         </div>
 
         <div class="admin-card">
-            <table class="table table-dark table-striped table-hover">
+            <div class="table-responsive"><table class="table table-dark table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Email</th>
@@ -98,7 +98,7 @@
                         <tr><td colspan="2" class="text-center">No subscribers yet.</td></tr>
                     @endforelse
                 </tbody>
-            </table>
+            </table></div>
         </div>
         <div class="admin-pagination">{{ $subscribers->links() }}</div>
     </div>

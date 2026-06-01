@@ -61,26 +61,40 @@
                     <h1>Terms of Service</h1>
                     <p class="about-lead">Last updated: May 2026</p>
 
-                    <h3>Acceptance of Terms</h3>
-                    <p>By accessing or using Irminsul Studio's website and services, you agree to be bound by these Terms of Service.</p>
+                    <div class="content-section">
+                        <h3>Acceptance of Terms</h3>
+                        <p>By accessing or using Irminsul Studio's website and services, you agree to be bound by these Terms of Service.</p>
+                    </div>
 
-                    <h3>User Accounts</h3>
-                    <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.</p>
+                    <div class="content-section">
+                        <h3>User Accounts</h3>
+                        <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.</p>
+                    </div>
 
-                    <h3>Acceptable Use</h3>
-                    <p>You agree not to misuse our services, engage in harassment, post inappropriate content, or violate any applicable laws.</p>
+                    <div class="content-section">
+                        <h3>Acceptable Use</h3>
+                        <p>You agree not to misuse our services, engage in harassment, post inappropriate content, or violate any applicable laws.</p>
+                    </div>
 
-                    <h3>Intellectual Property</h3>
-                    <p>All content, games, and materials on this site are the property of Irminsul Studio unless otherwise stated.</p>
+                    <div class="content-section">
+                        <h3>Intellectual Property</h3>
+                        <p>All content, games, and materials on this site are the property of Irminsul Studio unless otherwise stated.</p>
+                    </div>
 
-                    <h3>Limitation of Liability</h3>
-                    <p>Irminsul Studio shall not be liable for any indirect damages arising from the use of our services.</p>
+                    <div class="content-section">
+                        <h3>Limitation of Liability</h3>
+                        <p>Irminsul Studio shall not be liable for any indirect damages arising from the use of our services.</p>
+                    </div>
 
-                    <h3>Changes to Terms</h3>
-                    <p>We reserve the right to modify these terms at any time. Users will be notified of material changes.</p>
+                    <div class="content-section">
+                        <h3>Changes to Terms</h3>
+                        <p>We reserve the right to modify these terms at any time. Users will be notified of material changes.</p>
+                    </div>
 
-                    <h3>Contact</h3>
-                    <p>For questions about these terms, please <a href="{{ route('contact') }}" style="color: #db4f56;">contact us</a>.</p>
+                    <div class="content-section">
+                        <h3>Contact</h3>
+                        <p>For questions about these terms, please <a href="{{ route('contact') }}">contact us</a>.</p>
+                    </div>
                 </div>
             </div>
         </div>
