@@ -43,4 +43,9 @@ class Game extends Model
     {
         return $query->where('is_published', true);
     }
+
+    public function pageViews()
+    {
+        return $this->hasMany(PageView::class, 'page_id')->where('page_type', 'game');
+    }
 }

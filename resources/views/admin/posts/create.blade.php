@@ -94,6 +94,16 @@
                     </div>
                 </div>
 
+                <div class="mb-3">
+                    <label for="category_id" class="form-label">Category</label>
+                    <select name="category_id" id="category_id" class="form-control">
+                        <option value="">No Category</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <button type="submit" class="admin-upload-btn"><i class="fas fa-save"></i> Create Post</button>
             </form>
         </div>

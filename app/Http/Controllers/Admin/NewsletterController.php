@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\NewsletterSubscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Bus\Batchable;
 
 class NewsletterController extends Controller
 {
@@ -27,19 +29,24 @@ class NewsletterController extends Controller
             'body' => 'required|string',
         ]);
 
-        $subscribers = NewsletterSubscriber::pluck('email');
+        $subscribers = NewsletterSubscriber::all();
 
         if ($subscribers->isEmpty()) {
             return back()->with('error', 'No subscribers to send to.');
         }
 
-        foreach ($subscribers as $email) {
-            Mail::raw($request->body, function ($message) use ($email, $request) {
-                $message->to($email)
-                    ->subject($request->subject);
-            });
-        }
+        $jobs = $subscribers->map(function ($subscriber) use ($request) {
+            return new \App\Jobs\SendNewsletterEmail($subscriber, $request->subject, $request->body);
+        });
+
+        Bus::batch($jobs->toArray())->onConnection('sync')->dispatch();
 
         return back()->with('success', 'Broadcast sent to ' . $subscribers->count() . ' subscribers.');
+    }
+
+    public function destroy(NewsletterSubscriber $subscriber)
+    {
+        $subscriber->delete();
+        return back()->with('success', 'Subscriber removed.');
     }
 }

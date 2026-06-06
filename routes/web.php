@@ -22,7 +22,6 @@ Auth::routes();
 // Public pages
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home.page');
-Route::get('/gamespage', function () { return view('gamespage'); })->name('gamespage');
 Route::get('/aboutpage', function () {
     $teamMembers = \App\Models\TeamMember::ordered()->get();
     return view('aboutpage', compact('teamMembers'));
@@ -42,7 +41,14 @@ Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
 Route::get('/forum/create', [ForumController::class, 'create'])->name('forum.create')->middleware('auth');
 Route::post('/forum', [ForumController::class, 'store'])->name('forum.store')->middleware('auth');
 Route::get('/forum/{thread}', [ForumController::class, 'show'])->name('forum.show');
+Route::get('/forum/{thread}/edit', [ForumController::class, 'edit'])->name('forum.edit')->middleware('auth');
+Route::put('/forum/{thread}', [ForumController::class, 'update'])->name('forum.update')->middleware('auth');
+Route::delete('/forum/{thread}', [ForumController::class, 'destroy'])->name('forum.destroy')->middleware('auth');
 Route::post('/forum/{thread}/reply', [ForumController::class, 'reply'])->name('forum.reply')->middleware('auth');
+Route::get('/forum/replies/{reply}/edit', [ForumController::class, 'editReply'])->name('forum.reply.edit')->middleware('auth');
+Route::put('/forum/replies/{reply}', [ForumController::class, 'updateReply'])->name('forum.reply.update')->middleware('auth');
+Route::delete('/forum/replies/{reply}', [ForumController::class, 'destroyReply'])->name('forum.reply.destroy')->middleware('auth');
+Route::patch('/forum/{thread}/pin', [ForumController::class, 'togglePin'])->name('forum.togglePin')->middleware('auth');
 
 // Profiles
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
@@ -62,6 +68,7 @@ Route::get('/search', [SearchController::class, 'index'])->name('search');
 // Newsletter subscription
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 Route::post('/newsletter/unsubscribe', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
+Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribeByToken'])->name('newsletter.unsubscribe.token');
 
 // Game library (favorites)
 Route::post('/games/{game}/library', [LibraryController::class, 'toggle'])->name('library.toggle')->middleware('auth');
@@ -123,14 +130,33 @@ Route::middleware(['admin', \App\Http\Middleware\LogAdminActivity::class])->grou
     Route::get('/admin/messages', [\App\Http\Controllers\Admin\MessageController::class, 'index'])->name('admin.messages.index');
     Route::get('/admin/messages/{message}', [\App\Http\Controllers\Admin\MessageController::class, 'show'])->name('admin.messages.show');
     Route::delete('/admin/messages/{message}', [\App\Http\Controllers\Admin\MessageController::class, 'destroy'])->name('admin.messages.destroy');
-});
 
-// Legacy admin homepage management (kept for backwards compatibility)
-Route::get('/adminhomepages', function () { return view('adminhomepages'); })->name('adminhomepages');
-Route::get('/adminhomepage', [AdminHomepageImagesController::class, 'index']);
-Route::get('/dashboard', [AdminHomepageImagesController::class, 'index']);
-Route::post('/upload', [AdminHomepageImagesController::class, 'store'])->name('upload.image');
-Route::delete('/delete/{image}', [AdminHomepageImagesController::class, 'destroy'])->name('delete.image');
-Route::post('/edit/{image}', [AdminHomepageImagesController::class, 'update'])->name('edit.image');
-Route::get('/dashboard-images', [AdminHomepageImagesController::class, 'getDashboardImages'])->name('dashboard.images');
-Route::get('/featured-games', [AdminHomepageImagesController::class, 'getFeaturedGames'])->name('featured.games');
+    // Analytics
+    Route::get('/admin/analytics', [\App\Http\Controllers\Admin\AnalyticsController::class, 'index'])->name('admin.analytics');
+
+    // Forum moderation
+    Route::patch('/admin/forum/{thread}/pin', [\App\Http\Controllers\Admin\ForumModerationController::class, 'togglePin'])->name('admin.forum.togglePin');
+    Route::delete('/admin/forum/{thread}', [\App\Http\Controllers\Admin\ForumModerationController::class, 'destroyThread'])->name('admin.forum.destroyThread');
+    Route::delete('/admin/forum/replies/{reply}', [\App\Http\Controllers\Admin\ForumModerationController::class, 'destroyReply'])->name('admin.forum.destroyReply');
+
+    // Post categories
+    Route::get('/admin/categories', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('admin.categories.index');
+    Route::post('/admin/categories', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('admin.categories.store');
+    Route::delete('/admin/categories/{category}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+
+    // Contact message reply
+    Route::post('/admin/messages/{message}/reply', [\App\Http\Controllers\Admin\MessageController::class, 'reply'])->name('admin.messages.reply');
+    Route::patch('/admin/messages/{message}/read', [\App\Http\Controllers\Admin\MessageController::class, 'toggleRead'])->name('admin.messages.toggleRead');
+
+    // Newsletter subscriber management
+    Route::delete('/admin/newsletter/{subscriber}', [\App\Http\Controllers\Admin\NewsletterController::class, 'destroy'])->name('admin.newsletter.destroy');
+
+    // User management
+    Route::delete('/admin/users/{user}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.users.destroy');
+
+    // Legacy admin homepage management (moved behind admin middleware)
+    Route::get('/adminhomepages', function () { return view('adminhomepages'); })->name('adminhomepages');
+    Route::post('/upload', [AdminHomepageImagesController::class, 'store'])->name('upload.image');
+    Route::delete('/delete/{image}', [AdminHomepageImagesController::class, 'destroy'])->name('delete.image');
+    Route::post('/edit/{image}', [AdminHomepageImagesController::class, 'update'])->name('edit.image');
+});

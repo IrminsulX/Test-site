@@ -30,7 +30,7 @@ class AdminHomepageImagesController extends Controller {
     {
         $request->validate([
             'gameName' => 'required|string',
-            'fileUpload' => 'required|image|mimes:jpg,png,gif,webp|max:2048',
+            'fileUpload' => 'required|image|mimes:jpg,png,gif,webp|max:10240',
             'type' => 'required|in:dashboard,featured',
         ]);
 
@@ -54,7 +54,7 @@ class AdminHomepageImagesController extends Controller {
     public function update(Request $request, AdminHomepageImages $image) {
         $request->validate([
             'gameName' => 'required|string|max:255',
-            'fileUpload' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'fileUpload' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
         ]);
 
         // Update game name

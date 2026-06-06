@@ -8,7 +8,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'content', 'excerpt', 'featured_image', 'user_id', 'is_published', 'published_at'];
+    protected $fillable = ['title', 'slug', 'content', 'excerpt', 'featured_image', 'user_id', 'category_id', 'is_published', 'published_at'];
 
     protected function casts(): array
     {
@@ -29,6 +29,11 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function category()
+    {
+        return $this->belongsTo(PostCategory::class);
+    }
+
     public function scopePublished($query)
     {
         return $query->where('is_published', true);
@@ -37,5 +42,10 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(PostComment::class);
+    }
+
+    public function pageViews()
+    {
+        return $this->hasMany(PageView::class, 'page_id')->where('page_type', 'post');
     }
 }

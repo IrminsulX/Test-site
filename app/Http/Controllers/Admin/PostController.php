@@ -16,7 +16,8 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = \App\Models\PostCategory::orderBy('name')->get();
+        return view('admin.posts.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -25,8 +26,9 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'excerpt' => 'nullable|string|max:500',
-            'featured_image' => 'nullable|image|mimes:jpg,png,gif,webp|max:2048',
+            'featured_image' => 'nullable|image|mimes:jpg,png,gif,webp|max:10240',
             'is_published' => 'boolean',
+            'category_id' => 'nullable|exists:post_categories,id',
         ]);
 
         if ($request->hasFile('featured_image')) {
@@ -45,7 +47,8 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = \App\Models\PostCategory::orderBy('name')->get();
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     public function update(Request $request, Post $post)
@@ -54,8 +57,9 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'excerpt' => 'nullable|string|max:500',
-            'featured_image' => 'nullable|image|mimes:jpg,png,gif,webp|max:2048',
+            'featured_image' => 'nullable|image|mimes:jpg,png,gif,webp|max:10240',
             'is_published' => 'boolean',
+            'category_id' => 'nullable|exists:post_categories,id',
         ]);
 
         if ($request->hasFile('featured_image')) {

@@ -27,7 +27,7 @@ class GameController extends Controller
             'description' => 'nullable|string',
             'play_url' => 'nullable|url|max:255',
             'status' => 'required|in:released,beta,coming_soon',
-            'featured_image' => 'nullable|image|mimes:jpg,png,gif,webp|max:2048',
+            'featured_image' => 'nullable|image|mimes:jpg,png,gif,webp|max:10240',
             'is_published' => 'boolean',
         ]);
 
@@ -53,7 +53,7 @@ class GameController extends Controller
             'description' => 'nullable|string',
             'play_url' => 'nullable|url|max:255',
             'status' => 'required|in:released,beta,coming_soon',
-            'featured_image' => 'nullable|image|mimes:jpg,png,gif,webp|max:2048',
+            'featured_image' => 'nullable|image|mimes:jpg,png,gif,webp|max:10240',
             'is_published' => 'boolean',
         ]);
 
@@ -100,7 +100,7 @@ class GameController extends Controller
     public function uploadImage(Request $request, Game $game)
     {
         $data = $request->validate([
-            'image' => 'required|image|mimes:jpg,png,gif,webp|max:2048',
+            'image' => 'required|image|mimes:jpg,png,gif,webp|max:10240',
             'caption' => 'nullable|string|max:255',
         ]);
 

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use App\Models\Post;
 use App\Models\ForumThread;
+use App\Models\TeamMember;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -13,27 +14,36 @@ class SearchController extends Controller
         $games = collect();
         $posts = collect();
         $threads = collect();
+        $teamMembers = collect();
 
         if ($query) {
             $request->validate(['q' => 'string|max:100']);
-            $games = Game::where('name', 'like', "%{$query}%")
-                ->orWhere('description', 'like', "%{$query}%")
+            $escaped = '%' . addslashes($query) . '%';
+
+            $games = Game::where('name', 'like', $escaped)
+                ->orWhere('description', 'like', $escaped)
                 ->published()
                 ->take(5)
                 ->get();
 
-            $posts = Post::where('title', 'like', "%{$query}%")
-                ->orWhere('content', 'like', "%{$query}%")
+            $posts = Post::where('title', 'like', $escaped)
+                ->orWhere('content', 'like', $escaped)
                 ->published()
                 ->take(5)
                 ->get();
 
-            $threads = ForumThread::where('title', 'like', "%{$query}%")
-                ->orWhere('body', 'like', "%{$query}%")
+            $threads = ForumThread::where('title', 'like', $escaped)
+                ->orWhere('body', 'like', $escaped)
+                ->take(5)
+                ->get();
+
+            $teamMembers = TeamMember::where('name', 'like', $escaped)
+                ->orWhere('role', 'like', $escaped)
+                ->orWhere('bio', 'like', $escaped)
                 ->take(5)
                 ->get();
         }
 
-        return view('search.index', compact('query', 'games', 'posts', 'threads'));
+        return view('search.index', compact('query', 'games', 'posts', 'threads', 'teamMembers'));
     }
 }

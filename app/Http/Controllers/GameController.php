@@ -6,10 +6,31 @@ use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $games = Game::published()->withCount('images')->get();
-        return view('games.index', compact('games'));
+        $query = Game::published()->withCount('images');
+
+        $status = $request->get('status');
+        if ($status && in_array($status, ['released', 'beta', 'coming_soon'])) {
+            $query->where('status', $status);
+        }
+
+        $sort = $request->get('sort', 'newest');
+        switch ($sort) {
+            case 'oldest':
+                $query->oldest();
+                break;
+            case 'name':
+                $query->orderBy('name');
+                break;
+            case 'newest':
+            default:
+                $query->latest();
+                break;
+        }
+
+        $games = $query->get();
+        return view('games.index', compact('games', 'status', 'sort'));
     }
 
     public function show(Game $game)

@@ -27,7 +27,7 @@ class ProfileController extends Controller
             'bio' => 'nullable|string|max:1000',
             'twitter' => 'nullable|string|max:255',
             'discord' => 'nullable|string|max:255',
-            'avatar' => 'nullable|image|mimes:jpg,png,gif,webp|max:2048',
+            'avatar' => 'nullable|image|mimes:jpg,png,gif,webp|max:10240',
         ]);
 
         if ($request->hasFile('avatar')) {

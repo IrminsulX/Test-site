@@ -62,8 +62,8 @@
                         <input type="text" id="name" name="name" placeholder="Your name" required>
                     </div>
                     <div class="form-group">
-                        <label for="companyname">Company Name <span>(optional)</span></label>
-                        <input type="text" id="companyname" name="companyname" placeholder="Company name">
+                        <label for="company">Company Name <span>(optional)</span></label>
+                        <input type="text" id="company" name="company" placeholder="Company name">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>

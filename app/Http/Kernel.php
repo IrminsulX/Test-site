@@ -51,7 +51,9 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-        'admin' => \App\Http\Middleware\AdminMiddleware::class, // Add this line
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'moderator' => \App\Http\Middleware\ModeratorMiddleware::class,
+        'editor' => \App\Http\Middleware\EditorMiddleware::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
     

@@ -25,6 +25,24 @@
             <span class="featured-star" style="color: #ffd700; font-size: 2rem;">&#9733;</span>
         </div>
 
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+            <form method="GET" class="d-flex gap-2 flex-wrap">
+                <select name="status" class="form-select" style="background: #212121; color: #fff; border: 1px solid #444; border-radius: 5px; padding: 8px 12px;">
+                    <option value="">All Statuses</option>
+                    <option value="released" {{ ($status ?? '') === 'released' ? 'selected' : '' }}>Released</option>
+                    <option value="beta" {{ ($status ?? '') === 'beta' ? 'selected' : '' }}>Beta</option>
+                    <option value="coming_soon" {{ ($status ?? '') === 'coming_soon' ? 'selected' : '' }}>Coming Soon</option>
+                </select>
+                <select name="sort" class="form-select" style="background: #212121; color: #fff; border: 1px solid #444; border-radius: 5px; padding: 8px 12px;">
+                    <option value="newest" {{ ($sort ?? 'newest') === 'newest' ? 'selected' : '' }}>Newest First</option>
+                    <option value="oldest" {{ ($sort ?? '') === 'oldest' ? 'selected' : '' }}>Oldest First</option>
+                    <option value="name" {{ ($sort ?? '') === 'name' ? 'selected' : '' }}>Name A-Z</option>
+                </select>
+                <button type="submit" style="padding: 8px 16px; background: #db4f56; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">Filter</button>
+            </form>
+            <span style="color: #aaa;">{{ $games->count() }} game(s) found</span>
+        </div>
+
         <div class="row g-4">
             @forelse($games as $game)
                 <div class="col-md-6 col-lg-4">
@@ -66,49 +84,7 @@
         </div>
     </div>
 
-    <!-- Footer's section -->
-
-    <footer class="footer">
-        <div class="footer-inner">
-            <div class="footer-social">
-                <a href="https://www.instagram.com" target="_blank" class="social-btn instagram">
-                        <img src="{{ asset('images/instagram-white-icon.png') }}" alt="Instagram">
-                </a>
-                <a href="https://www.youtube.com" target="_blank" class="social-btn youtube">
-                        <img src="{{ asset('images/youtube-app-white-icon.png') }}" alt="YouTube">
-                </a>
-                <a href="https://x.com/?mx=2" target="_blank" class="social-btn twitter">
-                        <img src="{{ asset('images/x-social-media-white-icon.png') }}" alt="twitter">
-                </a>
-                <a href="https://discord.com/" target="_blank" class="social-btn discord">
-                        <img src="{{ asset('images/discord-white-icon.png') }}" alt="discord">
-                </a>
-                <a href="https://bsky.app/" target="_blank" class="social-btn bluesky">
-                        <img src="{{ asset('images/bluesky-icon.png') }}" alt="bluesky">
-                </a>
-            </div>
-            <div class="footer-center">
-                <div class="footer-links">
-                    <a href="{{ route('privacy') }}">Privacy</a>
-                    <span class="sep">·</span>
-                    <a href="{{ route('terms') }}">Terms</a>
-                    <span class="sep">·</span>
-                    <a href="{{ route('press-kit') }}">Press Kit</a>
-                </div>
-                <div class="footer-copyright">
-                    &copy; 2025 Irminsul Studio ツ
-                </div>
-            </div>
-            <div class="footer-right">
-                @auth
-                    @if(auth()->user()->isAdmin())
-                        <a href="{{ route('adminhomepages') }}" class="footer-admin-btn">Admin</a>
-                    @endif
-                @endauth
-                <div class="footer-spinner"></div>
-            </div>
-        </div>
-    </footer>
+    @include('partials.footer')
     
 <script src="/js/homepage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

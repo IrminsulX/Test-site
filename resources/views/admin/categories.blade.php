@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Irminsul Studio | Admin Dashboard</title>
+    <title>Irminsul Studio | Categories</title>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/adminhomepage.css') }}">
 </head>
@@ -30,46 +30,58 @@
         <a href="{{ route('admin.messages.index') }}"><button class="admin-nav-btn"><i class="fas fa-envelope"></i> Messages</button></a>
         <a href="{{ route('admin.newsletter.index') }}"><button class="admin-nav-btn"><i class="fas fa-mail-bulk"></i> Newsletter</button></a>
         <a href="{{ route('admin.logs') }}"><button class="admin-nav-btn"><i class="fas fa-history"></i> Activity</button></a>
-        <a href="{{ route('adminhomepages') }}"><button class="admin-nav-btn"><i class="fas fa-tachometer-alt"></i> Dashboard</button></a>
+        <a href="{{ route('adminhomepages') }}"><button class="admin-nav-btn"><i class="fas fa-tachometer-alt"></i> Homepage</button></a>
     </div>
 
     <div class="admin-section">
         <div class="admin-section-header">
             <span class="admin-section-star">&#9733;</span>
-            <h3>Overview</h3>
+            <h3>Categories</h3>
             <span class="admin-section-star">&#9733;</span>
         </div>
 
-        <div class="admin-card" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 30px;">
-            <div style="text-align: center; background: #212121; padding: 25px; border-radius: 8px;">
-                <div style="font-size: 2rem; color: #db4f56;"><i class="fas fa-gamepad"></i></div>
-                <div style="font-size: 1.8rem; font-weight: bold; color: #fff; margin: 10px 0;">{{ $gameCount ?? '-' }}</div>
-                <div style="color: #aaa;">Games</div>
-            </div>
-            <div style="text-align: center; background: #212121; padding: 25px; border-radius: 8px;">
-                <div style="font-size: 2rem; color: #ffd700;"><i class="fas fa-newspaper"></i></div>
-                <div style="font-size: 1.8rem; font-weight: bold; color: #fff; margin: 10px 0;">{{ $postCount ?? '-' }}</div>
-                <div style="color: #aaa;">News Posts</div>
-            </div>
-            <div style="text-align: center; background: #212121; padding: 25px; border-radius: 8px;">
-                <div style="font-size: 2rem; color: #4caf50;"><i class="fas fa-users"></i></div>
-                <div style="font-size: 1.8rem; font-weight: bold; color: #fff; margin: 10px 0;">{{ $userCount ?? '-' }}</div>
-                <div style="color: #aaa;">Users</div>
-            </div>
-            <div style="text-align: center; background: #212121; padding: 25px; border-radius: 8px;">
-                <div style="font-size: 2rem; color: #42a5f5;"><i class="fas fa-envelope"></i></div>
-                <div style="font-size: 1.8rem; font-weight: bold; color: #fff; margin: 10px 0;">{{ $messageCount ?? '-' }}</div>
-                <div style="color: #aaa;">Messages</div>
-            </div>
-            <div style="text-align: center; background: #212121; padding: 25px; border-radius: 8px;">
-                <div style="font-size: 2rem; color: #ab47bc;"><i class="fas fa-mail-bulk"></i></div>
-                <div style="font-size: 1.8rem; font-weight: bold; color: #fff; margin: 10px 0;">{{ $subscriberCount ?? '-' }}</div>
-                <div style="color: #aaa;">Subscribers</div>
-            </div>
-            <div style="text-align: center; background: #212121; padding: 25px; border-radius: 8px;">
-                <div style="font-size: 2rem; color: #ff7043;"><i class="fas fa-history"></i></div>
-                <div style="font-size: 1.8rem; font-weight: bold; color: #fff; margin: 10px 0;">{{ $logCount ?? '-' }}</div>
-                <div style="color: #aaa;">Actions Logged</div>
+        <div class="admin-card" style="padding: 30px; margin-bottom: 30px;">
+            <h5 style="color: #fff; margin-bottom: 20px;"><i class="fas fa-plus-circle"></i> Add New Category</h5>
+            <form action="{{ route('admin.categories.store') }}" method="POST" style="display: flex; gap: 15px; align-items: flex-end;">
+                @csrf
+                <div style="flex: 1;">
+                    <label for="name" style="color: #aaa; display: block; margin-bottom: 5px;">Category Name</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter category name" required style="background: #212121; border: 1px solid #444; color: #fff;">
+                </div>
+                <button type="submit" class="btn btn-danger" style="padding: 10px 25px;"><i class="fas fa-plus"></i> Add Category</button>
+            </form>
+        </div>
+
+        <div class="admin-card" style="padding: 30px;">
+            <div class="table-responsive">
+                <table class="table table-dark table-hover" style="margin-bottom: 0;">
+                    <thead>
+                        <tr>
+                            <th style="border-bottom: 1px solid #444;">Name</th>
+                            <th style="border-bottom: 1px solid #444;">Post Count</th>
+                            <th style="border-bottom: 1px solid #444; text-align: right;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($categories as $category)
+                        <tr>
+                            <td style="vertical-align: middle;">{{ $category->name }}</td>
+                            <td style="vertical-align: middle;">{{ $category->posts_count ?? $category->posts->count() }}</td>
+                            <td style="text-align: right; vertical-align: middle;">
+                                <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this category?');" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i> Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="3" style="text-align: center; color: #aaa; padding: 30px;">No categories found.</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
