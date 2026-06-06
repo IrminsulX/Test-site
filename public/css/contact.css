@@ -11,61 +11,6 @@ body {
 
 
 
-.logo-icon {
-  width: 40px; /* Adjust the size of the logo */
-  height: auto;
-}
-
-
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------- */
-
-/* Irminsul Studio Buttons */ 
-
-.studio-button {
-    font-size: 18px;
-    color: #e1e1e1;
-    font-family: inherit;
-    font-weight: 800;
-    cursor: pointer;
-    position: relative;
-    border: none;
-    background: none;
-    text-transform: uppercase;
-    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-    transition-duration: 400ms;
-    transition-property: color;
-}
-  
-.studio-button:focus,
-.studio-button:hover {
-    color: #fff;
-}
-  
-.studio-button:focus:after,
-.studio-button:hover:after {
-   width: 100%;
-   left: 0%;
-}
-  
-.studio-button:after {
-    content: "";
-    pointer-events: none;
-    bottom: -2px;
-    left: 50%;
-    position: absolute;
-    width: 0%;
-    height: 2px;
-    background-color: #d67c7c;
-    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-    transition-duration: 400ms;
-    transition-property: width, left;
-}
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------- */
-
-
-
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
 
@@ -260,28 +205,6 @@ body {
     box-shadow: 0px 2px 0px #d67c7c;
     position: relative;
     top: 2px;
-}
-
-/* Navbar Toggler */
-.navbar-toggler {
-    border: 1px solid #555;
-    padding: 12px 16px;
-    border-radius: 4px;
-    background: transparent;
-    margin-left: auto;
-}
-
-.navbar-toggler:focus {
-    box-shadow: 0 0 0 2px #db4f56;
-    outline: none;
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255,255,255,0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-    width: 1.5em;
-    height: 1.5em;
-    display: inline-block;
-    vertical-align: middle;
 }
 
 /* Responsive */
@@ -579,59 +502,6 @@ body {
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------ */
-
-/* header-border Section */
-
-.header-border {
-    width: 37.5px;
-    height: 37.5px;
-    border-left: 1.25px solid #38ff8e;
-    border-radius: 50%;
-    animation: right5231 0.9s linear infinite;
-    margin-top: 15px;
-  }
-  
-  .header-border::before,
-  .header-border::after {
-    content: "";
-    width: 30px;
-    height: 30px;
-    display: block;
-    position: absolute;
-    top: calc(50% - 15px);
-    left: calc(50% - 15px);
-    border-right: 1.25px solid #ffbe0b;
-    border-radius: 50%;
-    animation: left036 0.9s linear infinite;
-  }
-  
-  .header-border::after {
-    width: 22.5px;
-    height: 22.5px;
-    top: calc(50% - 11.25px);
-    left: calc(50% - 11.25px);
-    border: 0;
-    border-top: 1.25px solid #ff086e;
-    animation: none;
-  }
-  
-  @keyframes right5231 {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  @keyframes left036 {
-    from {
-      transform: rotate(720deg);
-    }
-    to {
-      transform: rotate(0deg);
-    }
-}
   
 
 

@@ -14,66 +14,7 @@
 
 <body>
 
-    <!-- Header section -->
-    <nav class="header">
-        <nav class="navbar navbar-expand-lg">
-
-            <!-- Logo and Brand -->
-            <a class="navbar d-flex align-items-center" href="{{ route('welcome') }}">
-                <img src="{{ asset('images/StudioLogo.png') }}" alt="Studio Logo" class="logo-icon">
-                <button class="studio-button">Irminsul Studio ツ</button>
-            </a>
-
-            <!-- Left Side Content (Empty for now) -->
-            <ul class="navbar-nav">
-                <!-- Left Side Content -->
-            </ul>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
-
-                <a class="nav-link" href="{{ route('welcome') }}">
-                    <button class="homepage-button">Home</button>
-                </a>
-
-                <a class="nav-link" href="{{ route('games.index') }}">
-                    <button class="homepage-button">Games</button>
-                </a>
-
-                <a class="nav-link" href="{{ route('posts.index') }}">
-                    <button class="homepage-button">News</button>
-                </a>
-
-                <a class="nav-link" href="{{ route('forum.index') }}">
-                    <button class="homepage-button">Forum</button>
-                </a>
-
-                <a class="nav-link" href="{{ route('aboutpage') }}">
-                    <button class="homepage-button">About</button>
-                </a>
-
-                <a class="nav-link" href="{{ route('contact') }}">
-                    <button class="homepage-button">Contact</button>
-                </a>
-
-                    <a class="nav-link" href="{{ route('search') }}">
-                        <button class="homepage-button" style="width: auto; padding: 10px 12px;"><i class="fas fa-search"></i></button>
-                    </a>
-
-                    <div class="header-border"></div>
-            
-                <a class="nav-link" href="{{ route('register') }}">
-                    <button class="register-button">Sign up</button>
-                </a>
-                
-                <a class="nav-link" href="{{ route('login') }}">
-                    <button class="register-button">Log in</button>
-                </a>
-
-            </ul>
-            
-        </nav>
-    </nav>
+    @include('partials.navbar')
     
     <!-- Dashboard Images Section -->
     <div class="dashboard-container">
